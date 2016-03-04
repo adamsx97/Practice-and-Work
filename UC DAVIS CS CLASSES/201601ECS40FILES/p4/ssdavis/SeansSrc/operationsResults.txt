@@ -1,0 +1,12 @@
+File#: 3
+Instruction string values without spaces (1 point): OK
+Register string spacing (1 point): OK
+Register values without spaces (4 points): OK
+File#: 4
+Instruction string values without spaces (1 point): OK
+Register string spacing (1 point): OK
+Register values without spaces (4 points): OK
+File#: 5
+Instruction string values without spaces (1 point): OK
+Register string spacing (1 point): OK
+Register values without spaces (4 points): OK

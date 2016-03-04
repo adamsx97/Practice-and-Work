@@ -1,0 +1,16 @@
+drwx------ 3 ssdavis users 4096 Feb 16 16:40 .
+drwx------ 2 ssdavis users 4096 Feb 16 16:40 ./private
+-rw-r--r-- 1 ssdavis users 1184 Feb 16 16:36 ./private/directory.cpp
+-rw-r--r-- 1 ssdavis users 752 Feb 16 16:33 ./private/file.cpp
+-rw-r--r-- 1 ssdavis users 2279 Feb 16 16:33 ./private/list.cpp
+-rw-r--r-- 1 ssdavis users 1033 Feb 16 16:37 ./private/main.cpp
+-rw-r--r-- 1 ssdavis users 354066 Feb 16 16:33 ./private/cs40aFiles
+-rw-r--r-- 1 ssdavis users 396 Feb 16 16:33 ./private/directory.h
+-rw-r--r-- 1 ssdavis users 399 Feb 16 16:33 ./private/file.h
+-rw-r--r-- 1 ssdavis users 475 Feb 16 16:33 ./private/list.h
+-rw-r--r-- 1 ssdavis users 393 Feb 16 16:37 ./private/Makefile
+-rwxr-xr-x 1 ssdavis users 20776 Feb 16 16:37 ./private/FileFind.out
+-rw-r--r-- 1 ssdavis users 750 Feb 16 16:40 ./p6Files.txt
+-rwxr-xr-x 1 ssdavis users 20776 Feb 16 16:37 ./FileFind.out
+-rw-r--r-- 1 ssdavis users 354066 Feb 16 16:33 ./cs40aFiles.txt
+-rw-r--r-- 1 ssdavis users 29691 Feb 16 16:33 ./40files.txt

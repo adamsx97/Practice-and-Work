@@ -1,0 +1,14 @@
+class Registers 
+{
+  int regs[8];
+  
+  static const int ZF = 0x40;
+  static const int SF = 0x80;
+public:
+}; // class Registers
+
+
+
+
+#endif	// REGISTERS_H 
+

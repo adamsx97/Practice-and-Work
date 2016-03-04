@@ -1,0 +1,6 @@
+Scores from p7 for Davis,Sean Davis,Steve , 
+
+Note that the format for authors.csv is: e-mail<comma>last name<comma>first name
+For example: ssdavis@ucdavis.edu,Davis,Sean
+
+Addresses used: davis@cs.ucdavis.edu ssdavis@ucdavis.edu   

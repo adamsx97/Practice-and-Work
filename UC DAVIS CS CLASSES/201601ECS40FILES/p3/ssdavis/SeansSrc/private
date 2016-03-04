@@ -1,0 +1,11 @@
+class Registers 
+{
+  int regs[4];
+public:
+}; // class Registers
+
+
+
+
+#endif	// REGISTERS_H 
+

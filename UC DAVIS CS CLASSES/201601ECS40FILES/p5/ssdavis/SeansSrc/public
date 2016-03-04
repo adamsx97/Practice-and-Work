@@ -1,0 +1,15 @@
+public:
+  typedef enum {eax, ebp, esp, eip, edx, ebx, ecx, flags} RegName;
+  Registers(); 
+  int* address(char *ptr, Memory &memory, const Labels &labels);
+  int get(Registers::RegName regName) const;
+  bool getSF() const;
+  bool getZF() const;
+ 
+  int operator+= (int change);
+  friend ostream& operator<< (ostream &os, const Registers &registers);
+  int* scaledIndexMode(char *operand, Memory &memory) const;
+  void set(Registers::RegName regName, int value);
+  void setFlags(int value);
+  int stringToRegNum(const char *regString) const;
+}; // class Registers

@@ -1,0 +1,11 @@
+class Registers 
+{
+  int regs[6];
+  int stringToRegNum(const char *regString) const;
+  static const int ZF = 0x40;
+  static const int SF = 0x80;
+public:
+}; // class Registers
+
+#endif	// REGISTERS_H 
+

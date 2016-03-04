@@ -1,0 +1,25 @@
+Processing :  /home/ssdavis/40/p1/SeansSrc/decoder.c
+Processing :  /home/ssdavis/40/p1/SeansSrc/instruction.c
+Processing :  /home/ssdavis/40/p1/SeansSrc/reader.c
+Processing :  /home/ssdavis/40/p1/SeansSrc/registers.c
+Processing :  /home/ssdavis/40/p1/SeansSrc/test1.c
+Processing :  /home/ssdavis/40/p1/SeansSrc/decoder.h
+Processing :  /home/ssdavis/40/p1/SeansSrc/instruction.h
+Processing :  /home/ssdavis/40/p1/SeansSrc/main.h
+Processing :  /home/ssdavis/40/p1/SeansSrc/reader.h
+Processing :  /home/ssdavis/40/p1/SeansSrc/registers.h
+Processing :  /home/ssdavis/40/p1/SeansSrc/main.c
+
+
+=================================== Summary Report ===================================
+ ** Total Available Rules     : 52
+ ** Total Applied Rules       : 31
+ ** Total Violated Rules      : 0
+ ** Total Errors Occurs       : 0
+ ** Total Analyzed Files      : 11
+ ** Total Violated Files Count: 0
+ ** Build Quality             : 100.00%
+
+================================ Violated Rule Details ===============================
+
+================================ Violated File Details ===============================

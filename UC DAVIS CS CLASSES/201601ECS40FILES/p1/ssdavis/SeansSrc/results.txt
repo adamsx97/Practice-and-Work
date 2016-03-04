@@ -1,0 +1,10 @@
+Scores from p1 for Davis Sean Davis Steve 
+Note that format is: e-mail<comma>last name<comma>first name
+For example: ssdavis@ucdavis.edu,Davis,Sean
+
+Addresses used: davis@cs.ucdavis.edu ssdavis@ucdavis.edu   
+Style: 12 out of 12
+Design: 14 out of 14
+Operation: 24 out of 24
+Warnings (subtracted from final score down to zero): 0
+Total: 50 out of 50.
