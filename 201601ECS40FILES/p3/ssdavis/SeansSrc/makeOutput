@@ -1,0 +1,6 @@
+g++ -Wall -ansi -g -c decoder.cpp
+g++ -Wall -ansi -g -c main.cpp
+g++ -Wall -ansi -g -c reader.cpp
+g++ -Wall -ansi -g -c registers.cpp
+g++ -Wall -ansi -g -c instruction.cpp
+g++ -Wall -ansi -g -o CPU.out decoder.o  main.o reader.o registers.o instruction.o 

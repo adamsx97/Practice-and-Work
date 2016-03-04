@@ -1,0 +1,18 @@
+Please enter a file name (Done = exit): ./40files.txt
+./FileFind.out
+./cs40aFiles.txt
+./p6Files.txt
+./private
+Please enter a file name (Done = exit): ./private/FileFind.out
+./private/Makefile
+./private/cs40aFiles
+./private/directory.cpp
+./private/directory.h
+./private/file.cpp
+./private/file.h
+./private/list.cpp
+./private/list.h
+./private/main.cpp
+Please enter a file name (Done = exit): Not found.
+Please enter a file name (Done = exit): Not found.
+Please enter a file name (Done = exit): 

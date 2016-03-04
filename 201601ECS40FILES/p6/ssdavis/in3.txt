@@ -1,0 +1,6 @@
+./handin/p4/vargash/decoder.cpp
+./handin/p4/vargash/decoder.c
+./handin/p4
+.Desktop
+Done
+
