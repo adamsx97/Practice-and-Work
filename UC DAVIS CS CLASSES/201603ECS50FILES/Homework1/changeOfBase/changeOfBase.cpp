@@ -10,18 +10,20 @@ typedef string::iterator SIT;
 
 int charToInt(char a)
 {
+
     if (a > '9')
         return a - 'A' + 10;
-    else
+    else // else
         return a - '0';
     
 } // charToInt()
 
 char intToChar(int a)
 {
+
     if (a >= 10)
         return 'A' + a - 10;
-    else
+    else // else
         return '0' + a;
 } // intToChar()
 
@@ -39,6 +41,7 @@ int main(void)
     
     l = (int)rn.length();
     int i = l - 1;
+
     for (SIT itr = rn.begin(); itr != rn.end(); itr++)
     {
         t = charToInt(*itr);
@@ -47,6 +50,7 @@ int main(void)
 
     int rm; // rm:remainder
     char buf; // buffer
+    
     while (num > 0)
     {
         rm = num % nb;
