@@ -1,4 +1,5 @@
 // Author Chengeng Xiao 2016.03.29
+// ECS50 HW1
 #include <iostream>
 #include <string>
 #include <math.h>
@@ -8,7 +9,7 @@ using namespace std;
 typedef union{
 	float f;
 	unsigned int fn;
-} FFF;
+} FFF; // union FFF
 
 int main(void)
 {
@@ -39,9 +40,9 @@ int main(void)
         bit <<=1;
         if (bit & 0x0800000)
             bitwise.append("1");
-        else
+        else // else
             bitwise.append("0");
-    }
+    } // for()
     for (string::iterator itr = bitwise.end() - 1; *itr == '0'; itr--)
         bitwise.pop_back();
     cout << bitwise;
@@ -49,15 +50,17 @@ int main(void)
 
     cout << "E";
     int exp = (n >> 23) & 0x0FF;
+
     exp -= 127; //bias 127
     if(exp < 0)
     {
         cout << '-';
         exp = -exp;
-    }
+    } // if()
     // exponent sign
 
     int i = 0;
+
     while((exp & 0x080) == 0 && i < 8)
     {
         exp <<= 1;
@@ -65,6 +68,7 @@ int main(void)
     } // skip zero of top
 
     int expo = 0;
+
     if(i == 8)
    		cout << '0';
     for(;i< 8 ; ++i){
@@ -74,5 +78,6 @@ int main(void)
     }
     cout << expo << endl;
     // exponent number
+
 	return 0;
 } // main()
