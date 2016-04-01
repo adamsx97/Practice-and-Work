@@ -20,13 +20,14 @@ void LongInt::insert(ListNode *newLN)
 bool LongInt::isempty()
 {
   if(head)
-    return 1;
-  return 0;
+    return 0;
+  return 1;
 } // isempty()
 
 int LongInt::pop_back()
 {
   int buf;
+  buf = tail->num;
   if(tail != head)
     tail = tail->prev;
   else
