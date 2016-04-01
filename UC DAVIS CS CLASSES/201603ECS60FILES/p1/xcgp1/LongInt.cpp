@@ -10,13 +10,6 @@ using namespace std;
 
 typedef string::iterator SIT;
 
-LongInt::LongInt()
-{
-  head = NULL;
-  tail = NULL;
-  curr = NULL;
-} //constructor
-
 void LongInt::insert(ListNode *newLN)
 {
   tail->next = newLN;
