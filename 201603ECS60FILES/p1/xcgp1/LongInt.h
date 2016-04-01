@@ -4,17 +4,13 @@
 
 class ListNode
 {
-	ListNode* prev, next;
+	ListNode *prev, *next;
 	int num;
-};
+}; // class ListNode
 
 class LongInt
 {
 	LN* head, tail, curr;
 	insert
 
-};
-
-void calc(LongInt& )
-
-LongInt 
+}; // class LongInt a linked list
