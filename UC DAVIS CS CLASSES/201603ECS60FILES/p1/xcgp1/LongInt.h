@@ -10,7 +10,7 @@ class ListNode
 public:
 	ListNode *prev, *next;
 	int num;
-	ListNode() : prev(NULL), next(NULL) {}
+	ListNode(int n) : prev(NULL), next(NULL), num(n) {}
 	friend class LongInt;
 }; // class ListNode
 
