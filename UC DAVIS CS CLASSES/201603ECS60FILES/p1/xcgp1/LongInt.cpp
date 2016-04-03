@@ -1,28 +1,41 @@
-// 2016-03-31 19:58
-// Author Chengeng Xiao and Srikanth Cherukuri 
-// ECS60 HW1
-
 #include <iostream>
-#include <string>
 #include "LongInt.h"
 
 using namespace std;
 
-typedef string::iterator SIT;
-
-void LongInt::insert(ListNode *newLN)
+void LongInt::insertT(ListNode *newLN)
 {
+  if (head == NULL)
+  {
+    head = newLN;
+    tail = newLN;
+    return;
+  }
   tail->next = newLN;
   newLN->prev = tail;
   tail = newLN;
-} // insert()
+} // insert(): insert to tail
+
+void LongInt::insertH(ListNode *newLN)
+{
+  if (head == NULL)
+  {
+    head = newLN;
+    tail = newLN;
+    return;
+  }
+  head->prev = newLN;
+  newLN->next = head;
+  head = newLN;
+} // insert(): insert to head
+
 
 bool LongInt::isempty()
 {
   if(head)
     return 0;
   return 1;
-} // isempty()
+} // isempty(): return 0 if is empty
 
 int LongInt::pop_back()
 {
@@ -34,6 +47,24 @@ int LongInt::pop_back()
     head = NULL;
   return buf;
 } // pop_back()
+
+LongInt LongInt::operator + (LongInt& addl)
+{
+  LongInt ans;
+  ListNode* buf;
+  while(this->isempty() && addl.isempty())
+  {
+    buf = new ListNode(this->pop_back() + adds.pop_back);
+    this->insertH
+  } // 
+  return ans;
+} // Overloaded operator + for push the ans into int3.
+
+void LongInt::operator = (LongInt& ans)
+{
+  head = ans.head;
+  tail = ans.tail;
+} // Overloaded operator = for push the ans into int3.
 
 int main() {
   LongInt int1, int2, int3;
