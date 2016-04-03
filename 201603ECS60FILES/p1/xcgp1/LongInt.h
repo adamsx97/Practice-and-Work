@@ -19,7 +19,8 @@ class LongInt
 	ListNode *head, *tail, *curr;
 public:
 	LongInt() : head(NULL), tail(NULL), curr(NULL) {}
-	void insert(int n);
+	void insertT(ListNode *newLN);
+	void insertH(ListNode *newLN)
 	bool isempty();
 	int pop_back();
 	std::ostream& operator<<(std::ostream& os, LongInt& obj);
