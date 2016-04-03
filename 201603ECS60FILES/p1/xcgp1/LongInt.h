@@ -23,10 +23,10 @@ public:
 	void insertH(ListNode *newLN);
 	bool isempty();
 	int pop_back();
-	std::ostream& operator<<(std::ostream& os, LongInt& obj);
-	std::istream& operator>>(std::istream& is, LongInt& obj);
-	void operator=(const LongInt& object) const;
-	LongInt operator+(const LongInt& object) const;
+	friend std::ostream& operator<<(std::ostream& os, LongInt& obj);
+	friend std::istream& operator>>(std::istream& is, LongInt& obj);
+	friend void operator=(const LongInt& object) const;
+	friend LongInt operator+(const LongInt& object) const;
 
 }; // class LongInt a linked list
 #endif
