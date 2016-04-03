@@ -20,7 +20,7 @@ class LongInt
 public:
 	LongInt() : head(NULL), tail(NULL), curr(NULL) {}
 	void insertT(ListNode *newLN);
-	void insertH(ListNode *newLN)
+	void insertH(ListNode *newLN);
 	bool isempty();
 	int pop_back();
 	std::ostream& operator<<(std::ostream& os, LongInt& obj);
