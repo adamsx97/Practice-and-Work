@@ -58,23 +58,9 @@ LongInt LongInt::operator + (LongInt& addl)
   ListNode* buf;
   while(this->isempty() && addl.isempty())
   {
-    buf = new ListNode(this->pop_back() + addl.pop_back());
-    ans->insertH(buf);
-  } // do addings
-
-  if (!this->isempty())
-    while(addl.isempty())
-    {
-      buf = new ListNode(addl.pop_back());
-      ans->insertH(buf);
-    } // do the unequal length parts
-  else // ditto
-    while(this->isempty())
-    {
-      buf = new ListNode(this->pop_back());
-      ans->insertH(buf);
-    } // do the unequal length parts
-    
+    buf = new ListNode(this->pop_back() + adds.pop_back);
+    this->insertH
+  } // 
   return ans;
 } // Overloaded operator + for push the ans into int3.
 
@@ -84,13 +70,31 @@ void LongInt::operator = (LongInt& ans)
   tail = ans.tail;
 } // Overloaded operator = for push the ans into int3.
 
-int main() {
-  LongInt int1, int2, int3;
-  cout << "Please enter first long integer >> ";
-  cin >> int1;
-  cout << "Please enter second long integer >> ";
-  cin >> int2;
-  int3 = int1 + int2;
-  cout << int3 << endl;
-  return 0;
-} // main()
+ostream& LongInt::operator<<(std::ostream& os, LongInt& obj)
+{
+  curr = head;
+  while (curr != NULL)
+  {
+    os << curr->num;
+    curr = curr -> next;
+  } // print()
+  os << endl;
+  return os;
+}
+istream& LongInt::operator>>(std::istream& is, LongInt& obj)
+{
+  char c;
+  int a;
+  ListNode* newLN;
+  while( is.get(c)){
+      if(!isdigit(c)) {
+            break;
+        }
+
+      a = c-48;
+      newLN = new ListNode(a);
+      this -> insertT(newLN);
+    }
+
+    return is;
+}
