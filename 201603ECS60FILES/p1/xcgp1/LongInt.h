@@ -24,7 +24,7 @@ public:
 	int pop_back();
 	std::ostream& operator<<(std::ostream& os, LongInt& obj);
 	std::istream& operator>>(std::istream& is, LongInt& obj);
-	void operator=(const LongInt& object) const;
+	LongInt operator=(const LongInt& object) const;
 	void operator+(const LongInt& object) const;
 
 }; // class LongInt a linked list
