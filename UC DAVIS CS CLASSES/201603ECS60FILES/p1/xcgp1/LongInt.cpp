@@ -58,9 +58,23 @@ LongInt LongInt::operator + (LongInt& addl)
   ListNode* buf;
   while(this->isempty() && addl.isempty())
   {
-    buf = new ListNode(this->pop_back() + adds.pop_back);
-    this->insertH
-  } // 
+    buf = new ListNode(this->pop_back() + addl.pop_back());
+    ans->insertH(buf);
+  } // do addings
+
+  if (!this->isempty())
+    while(addl.isempty())
+    {
+      buf = new ListNode(addl.pop_back());
+      ans->insertH(buf);
+    } // do the unequal length parts
+  else // ditto
+    while(this->isempty())
+    {
+      buf = new ListNode(this->pop_back());
+      ans->insertH(buf);
+    } // do the unequal length parts
+    
   return ans;
 } // Overloaded operator + for push the ans into int3.
 
