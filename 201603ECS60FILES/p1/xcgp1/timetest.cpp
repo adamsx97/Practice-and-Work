@@ -67,7 +67,7 @@ void RunStackAr(char *filename)
 {
   char selection;
   int number=0;
-  StackAr <int> runstackar[500000];
+  StackAr <int> runstackar;
   ifstream infile(filename);
   char contain[500000]; //not sure about this
   infile.getline(contain, 500000);//not sure about this
@@ -83,7 +83,7 @@ void RunStackLi(char *filename)
 {
   char selection;
   int number=0;
-  StackLi <int> runstackli[500000];
+  StackLi <int> runstackli;
   ifstream infile(filename);
   char contain[500000];//not sure about this
   infile.getline(contain, 500000);//not sure about this
@@ -99,7 +99,7 @@ void QueueAr(char *filename)
 {
   char selection;
   int number=0;
-  QueueAr <int> runqueuear[500000];
+  QueueAr <int> runqueuear;
   ifstream infile(filename);
   char contain[500000];//not sure
   infile.getline(contain, 500000);//not sure
@@ -116,7 +116,7 @@ void RunQueueAr(char *filename)
 {
   char selection;
   int number=0;
-  QueueAr <int> runqueuear[500000];
+  QueueAr <int> runqueuear;
   ifstream infile(filename);
   char contain[500000];//not sure
   infile.getline(contain, 500000);//not sure
@@ -133,7 +133,7 @@ void RunSkipList(char *filename)
 {
   char selectionl
   int number=0;
-  SkipList <int> runskiplist[500000];
+  SkipList <int> runskiplist;
   ifstream infile(filename);
   char contain[500000];//not sure
   infile.getline(contain,500000);//not sure
