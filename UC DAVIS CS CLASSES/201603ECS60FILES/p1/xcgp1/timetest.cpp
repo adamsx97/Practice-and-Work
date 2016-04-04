@@ -13,7 +13,7 @@ vector<CursorNode <int> > cursorSpace(250000);
 
 using namespace std;
 
-int Choose()
+int getChoice()
 {
 
   int choice;
@@ -49,7 +49,7 @@ void RunCursorList(char *filename)
   char selection;
   int number=0;
   ifstream infile(filename);
-  CursorList <int> cursorlist;
+  CursorList <int> cursorlist(cursorSpace);
   CursorListItr <int> itr=cursorlist.zeroth();
   char contain[500000]; //not sure about this
   infile.getline(contain, 500000); //not sure about this
@@ -95,35 +95,19 @@ void RunStackLi(char *filename)
       runstackli.pop();
   }
 }
-void QueueAr(char *filename)
-{
-  char selection;
-  int number=0;
-  QueueAr <int> runqueuear;
-  ifstream infile(filename);
-  char contain[500000];//not sure
-  infile.getline(contain, 500000);//not sure
-  while(infile>>selection>>number)
-  {
-    if(selection=='i')
-      runqueuear.enqueue(value);
-    else
-      runqueuear.dequeue();
 
-  }
-}
 void RunQueueAr(char *filename)
 {
   char selection;
   int number=0;
-  QueueAr <int> runqueuear;
+  Queue <int> runqueuear;
   ifstream infile(filename);
   char contain[500000];//not sure
   infile.getline(contain, 500000);//not sure
   while(infile>>selection>>number)
   {
     if(selection=='i')
-      runqueuear.enqueue(value);
+      runqueuear.enqueue(number);
     else
       runqueuear.dequeue();
     
@@ -131,25 +115,27 @@ void RunQueueAr(char *filename)
 }
 void RunSkipList(char *filename)
 {
-  char selectionl
+  char selection;
   int number=0;
-  SkipList <int> runskiplist;
+  SkipList <int> runskiplist(0, 500000);
   ifstream infile(filename);
   char contain[500000];//not sure
   infile.getline(contain,500000);//not sure
   while(infile>>selection>>number)
   {
     if(selection=='i')
-      runskiplist.insert(value);
+      runskiplist.insert(number);
     else
-      runskiplist.delete(value);
+      runskiplist.deleteNode(number);
     
   }
 }
 int main()
 {
+  cout << "Filename >> ";
   int choice;
-  char filename[10];
+  char filename[10] = {0};
+  cin >> filename;
   CPUTimer ct;
   do
   {
@@ -164,7 +150,7 @@ int main()
       case 5: RunQueueAr(filename); break;
       case 6: RunSkipList(filename); break;
     }
-    cout <<"CPU time: " <<ct.cur_CPUTime() <<endl;
+    cout <<"CPU time: " << ct.cur_CPUTime() <<endl;
   }   while(choice>0);
     return 0;
 
