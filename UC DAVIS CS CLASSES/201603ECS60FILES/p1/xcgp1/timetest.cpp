@@ -67,7 +67,7 @@ void RunStackAr(char *filename)
 {
   char selection;
   int number=0;
-  StackAr <int> runstackar;
+  StackAr <int> runstackar(500100);
   ifstream infile(filename);
   char contain[500000]; //not sure about this
   infile.getline(contain, 500000);//not sure about this
@@ -100,7 +100,7 @@ void RunQueueAr(char *filename)
 {
   char selection;
   int number=0;
-  Queue <int> runqueuear;
+  Queue <int> runqueuear(500100);
   ifstream infile(filename);
   char contain[500000];//not sure
   infile.getline(contain, 500000);//not sure
