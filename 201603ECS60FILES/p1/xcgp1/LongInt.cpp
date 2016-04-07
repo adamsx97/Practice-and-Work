@@ -9,29 +9,37 @@ using namespace std;
 
 LongInt LongInt::operator+(LongInt& obj)
 {
-LongInt int3;
-int flag = 0;
-int ans;
-while (!this->isEmpty() && !obj.isEmpty())
-{
+  LongInt int3;
+  int flag = 0;
+  int ans;
+
+  while (!this->data.isEmpty() && !obj.data.isEmpty())
+  {
     if (flag == 1)
-    {
-        ans = 1;
-    }
+       ans = 1;
     flag = 0;
-    int a = this->top();
-    int b = obj.top();
+    int a = this->data.top();
+    int b = obj.data.top();
     ans = ans + a + b;
+
     if (ans > 9)
     {
         flag = 1;
         ans -= 10;
     }
-    int3.insert(ans);
-    this->pop();
-    obj.pop();
-    return *this;
-} // Overloaded operator + for push the ans into int3.
+
+    int3.data.push(ans);
+    this->data.pop();
+    obj.data.pop();
+  }
+  return int3;
+} //Overloaded operator + for push the ans into int3.
+
+LongInt LongInt::operator=(const LongInt& obj)
+{
+  this->data = obj.data;
+  return *this;
+} // Overloaded operator = for assign the ans into int3.
 
 istream& LongInt::operator>>(istream& is, LongInt& obj)
 {
@@ -54,6 +62,5 @@ ostream& LongInt::operator<<(ostream& os, LongInt& obj)
     os << obj.data.top();
     obj.data.pop();
   } // while(): print sum one by one
-  os << endl;
   return os;
 } // overload output operator
