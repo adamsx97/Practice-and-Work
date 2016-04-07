@@ -17,8 +17,8 @@ public:
   ~LongInt();
   friend ostream& operator<<(ostream& os, LongInt& obj);
   friend istream& operator>>(istream& is, LongInt& obj);
-  void operator=(const LongInt& obj);
-  LongInt operator+(const LongInt& obj);
+  LongInt operator=(const LongInt& obj);
+  LongInt operator+(LongInt& obj);
 
 }; // class LongInt a linked list
 #endif
