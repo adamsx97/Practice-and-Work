@@ -7,36 +7,31 @@
 
 using namespace std;
 
-LongInt operator+(const LongInt &add1, const LongInt &add2)
+LongInt LongInt::operator+(LongInt& obj)
 {
-  ListNode* temp1, temp2, buf;
-  LongInt ans;
-  temp1 = add1.tail;
-  temp2 = add2.tail;
-  while (temp1 != NULL && temp2 != NULL)
-  {
-    buf = new ListNode(temp1->num + temp2->num);
-    ans.insertH(buf);
-    temp1 = temp1->prev;
-    temp2 = temp2->prev;
-  } // do addings
-
-  if (temp1 == NULL)
-    while (temp2 != NULL)
+LongInt int3;
+int flag = 0;
+int ans;
+while (!this->isEmpty() && !obj.isEmpty())
+{
+    if (flag == 1)
     {
-      buf = new ListNode(temp2->num);
-      ans.insertH(buf);
-      temp2 = temp2->prev;
+        ans = 1;
     }
-  else
-    while (temp1 != NULL)
+    flag = 0;
+    int a = this->top();
+    int b = obj.top();
+    ans = ans + a + b;
+    if (ans > 9)
     {
-      buf = new ListNode(temp1->num);
-      ans.insertH(buf);
-      temp1 = temp1->prev;
+        flag = 1;
+        ans -= 10;
     }
-  return ans;
-}
+    int3.insert(ans);
+    this->pop();
+    obj.pop();
+    return this;
+} // Overloaded operator + for push the ans into int3.
 
 istream& LongInt::operator>>(istream& is, LongInt& obj)
 {
