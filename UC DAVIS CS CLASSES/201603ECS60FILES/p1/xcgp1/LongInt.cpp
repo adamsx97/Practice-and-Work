@@ -59,5 +59,6 @@ ostream& LongInt::operator<<(ostream& os, LongInt& obj)
     os << obj.data.top();
     obj.data.pop();
   } // while(): print sum one by one
+  os << endl;
   return os;
 } // overload output operator
