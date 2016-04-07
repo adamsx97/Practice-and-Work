@@ -41,7 +41,7 @@ LongInt LongInt::operator=(const LongInt& obj)
   return *this;
 } // Overloaded operator = for assign the ans into int3.
 
-istream& LongInt::operator>>(istream& is, LongInt& obj)
+istream& operator>>(istream &is, LongInt &obj)
 {
   char c;
   obj.data.makeEmpty();
@@ -55,12 +55,13 @@ istream& LongInt::operator>>(istream& is, LongInt& obj)
   return is;
 } // overload input operator
 
-ostream& LongInt::operator<<(ostream& os, LongInt& obj)
+ostream& operator<<(ostream &os, LongInt &obj)
 {
   while(!obj.data.isEmpty())
   {
     os << obj.data.top();
     obj.data.pop();
   } // while(): print sum one by one
+  os << endl;
   return os;
 } // overload output operator
