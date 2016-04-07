@@ -7,108 +7,57 @@
 
 using namespace std;
 
-void LongInt::insertT(ListNode *newLN)
+LongInt operator+(const LongInt &add1, const LongInt &add2)
 {
-  if (head == NULL)
-  {
-    head = newLN;
-    tail = newLN;
-    return;
-  }
-  tail->next = newLN;
-  newLN->prev = tail;
-  tail = newLN;
-} // insert(): insert to tail
-
-void LongInt::insertH(ListNode *newLN)
-{
-  if (head == NULL)
-  {
-    head = newLN;
-    tail = newLN;
-    return;
-  }
-  head->prev = newLN;
-  newLN->next = head;
-  head = newLN;
-} // insert(): insert to head
-
-
-bool LongInt::isempty()
-{
-  if(head)
-    return 0;
-  return 1;
-} // isempty(): return 0 if is empty
-
-int LongInt::pop_back()
-{
-  int buf;
-  buf = tail->num;
-  if(tail != head)
-    tail = tail->prev;
-  else
-    head = NULL;
-  return buf;
-} // pop_back()
-
-LongInt LongInt::operator + (LongInt& addl)
-{
+  ListNode* temp1, temp2, buf;
   LongInt ans;
-  ListNode* buf;
-  while(this->isempty() && addl.isempty())
+  temp1 = add1.tail;
+  temp2 = add2.tail;
+  while (temp1 != NULL && temp2 != NULL)
   {
-    buf = new ListNode(this->pop_back() + addl.pop_back());
-    ans->insertH(buf);
+    buf = new ListNode(temp1->num + temp2->num);
+    ans.insertH(buf);
+    temp1 = temp1->prev;
+    temp2 = temp2->prev;
   } // do addings
 
-  if (!this->isempty())
-    while(addl.isempty())
+  if (temp1 == NULL)
+    while (temp2 != NULL)
     {
-      buf = new ListNode(addl.pop_back());
-      ans->insertH(buf);
-    } // do the unequal length parts
-  else // ditto
-    while(this->isempty())
+      buf = new ListNode(temp2->num);
+      ans.insertH(buf);
+      temp2 = temp2->prev;
+    }
+  else
+    while (temp1 != NULL)
     {
-      buf = new ListNode(this->pop_back());
-      ans->insertH(buf);
-    } // do the unequal length parts
-    
+      buf = new ListNode(temp1->num);
+      ans.insertH(buf);
+      temp1 = temp1->prev;
+    }
   return ans;
-} // Overloaded operator + for push the ans into int3.
-
-void LongInt::operator = (LongInt& ans)
-{
-  head = ans.head;
-  tail = ans.tail;
-} // Overloaded operator = for push the ans into int3.
-
-ostream& LongInt::operator<<(std::ostream& os, LongInt& obj)
-{
-  curr = head;
-  while (curr != NULL)
-  {
-    os << curr->num;
-    curr = curr -> next;
-  } // print()
-  os << endl;
-  return os;
 }
-istream& LongInt::operator>>(std::istream& is, LongInt& obj)
+
+istream& LongInt::operator>>(istream& is, LongInt& obj)
 {
   char c;
-  int a;
-  ListNode* newLN;
-  while( is.get(c)){
-      if(!isdigit(c)) {
-            break;
-        }
+  obj.data.makeEmpty();
 
-      a = c-48;
-      newLN = new ListNode(a);
-      this -> insertT(newLN);
-    }
+  while(is.get(c))
+  {
+    if(!isdigit(c)) break;
+    obj.data.push(c - 48); 
+  } // while(): read character by character break at the end of line
 
-    return is;
-}
+  return is;
+} // overload input operator
+
+ostream& LongInt::operator<<(ostream& os, LongInt& obj)
+{
+  while(!obj.data.isEmpty())
+  {
+    os << obj.data.top();
+    obj.data.pop();
+  } // while(): print sum one by one
+  return os;
+} // overload output operator
