@@ -15,7 +15,6 @@ private:
 public:
   LongInt();
   ~LongInt();
-  void insert(ListNode *newLN);
   friend ostream& operator<<(ostream& os, LongInt& obj);
   friend istream& operator>>(istream& is, LongInt& obj);
   void operator=(const LongInt& object);
