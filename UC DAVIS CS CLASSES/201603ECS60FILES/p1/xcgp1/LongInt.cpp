@@ -30,7 +30,7 @@ while (!this->isEmpty() && !obj.isEmpty())
     int3.insert(ans);
     this->pop();
     obj.pop();
-    return this;
+    return *this;
 } // Overloaded operator + for push the ans into int3.
 
 istream& LongInt::operator>>(istream& is, LongInt& obj)
