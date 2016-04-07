@@ -5,6 +5,7 @@
 #ifndef  LONGINT_H
 #define  LONGINT_H
 #include "StackLi.h"
+#include <iostream>
 
 using namespace std;
 
@@ -13,12 +14,11 @@ class LongInt
 private:
   StackLi<int> data;
 public:
-  LongInt();
-  ~LongInt();
-  friend ostream& operator<<(ostream& os, LongInt& obj);
-  friend istream& operator>>(istream& is, LongInt& obj);
+  friend ostream& operator<<(ostream &os, LongInt &obj);
+  friend istream& operator>>(istream &is, LongInt &obj);
   LongInt operator=(const LongInt& obj);
   LongInt operator+(LongInt& obj);
 
 }; // class LongInt a linked list
+
 #endif
