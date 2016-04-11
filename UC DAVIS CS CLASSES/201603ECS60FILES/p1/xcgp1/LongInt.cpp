@@ -15,12 +15,11 @@ LongInt LongInt::operator+(LongInt& obj)
 
   while (!this->data.isEmpty() && !obj.data.isEmpty())
   {
+    ans = 0;
     if (flag == 1)
        ans = 1;
     flag = 0;
-    int a = this->data.top();
-    int b = obj.data.top();
-    ans = ans + a + b;
+    ans += this->data.top() + obj.data.top();
 
     if (ans > 9)
     {
@@ -31,6 +30,38 @@ LongInt LongInt::operator+(LongInt& obj)
     int3.data.push(ans);
     this->data.pop();
     obj.data.pop();
+  }
+  if (!this->data.isEmpty())
+  {
+    while(!this->data.isEmpty())
+    {
+      if (flag == 1)
+      {
+        int3.data.push(this->data.top() + 1);
+        flag = 0;
+      }
+      else
+        int3.data.push(this->data.top());
+      this->data.pop();
+    }
+  }
+  else
+    {
+    while(!obj.data.isEmpty())
+    {
+      if (flag == 1)
+      {
+        int3.data.push(obj.data.top() + 1);
+        flag = 0;
+      }
+      else
+        int3.data.push(obj.data.top());
+      obj.data.pop();
+    }
+  }
+  if (flag == 1)
+  {
+    int3.data.push(1);
   }
   return int3;
 } //Overloaded operator + for push the ans into int3.
@@ -62,6 +93,5 @@ ostream& operator<<(ostream &os, LongInt &obj)
     os << obj.data.top();
     obj.data.pop();
   } // while(): print sum one by one
-  os << endl;
   return os;
 } // overload output operator
