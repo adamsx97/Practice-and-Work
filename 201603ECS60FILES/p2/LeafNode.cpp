@@ -41,15 +41,30 @@ LeafNode* LeafNode::insert(int value)
   }
   else
   {
-    if (leftSibling->count < leafSize)
+    if (leftSibling && leftSibling->getCount() < leafSize)
     {
       if (value < this->getMinimum())
         leftSibling->insert(value);
-      else
+      else // if value is not the smallest one
       {
         moveToLeft();
-        insertDirectly();
+        insertDirectly(value);
       }
+    } // insert to left
+    else if(rightSibling && rightSibling->getCount < leafSize)
+    {
+      if (value > values[count - 1])
+        rightSibling->insert(value);
+      else // if value is not the biggest one
+      {
+        moveToRight();
+        insertDirectly(value);
+      }
+    } // insert to right
+    else // no place in current leaf node and left&right sibling
+    {
+      insertDirectly(value);
+      return split();
     }
   }
   return NULL; // to avoid warnings for now.
@@ -65,7 +80,14 @@ void LeafNode::print(Queue <BTreeNode*> &queue)
 
 LeafNode* LeafNode::split()
 {
-
+  LeafNode *newNode = new LeafNode(leafSize, parent, this, rightSibling);
+  this->rightSibling = newNode;
+  if(rightSibling)
+    rightSibling->leftSibling = setLeftSibling(newNode);
+  for (int i = count / 2; i < count; i++)
+    newNode->insert(values[i]);
+  count = count / 2;
+  return newNode;
 } // split()
 
 void LeafNode::insertDirectly(int value)
@@ -77,13 +99,18 @@ void LeafNode::insertDirectly(int value)
     return;
   } // if no element in curr leaf node
 
+  int flag = 1;
   for (int i = 0; i < count; i++)
     if (value < values[i])
     {
       for (int j = i; j < count; j++)
         values[j] = values[j + 1];
       values[i] = value;
+      flag = 0;
+      break;
     }
+  if (flag)
+    values[count] = value;
   count++;
   return;
 } // insertDirectly()
@@ -91,5 +118,13 @@ void LeafNode::insertDirectly(int value)
   
 void LeafNode::moveToLeft()
 {
-
+  leftSibling->insert(values[0]);
+  for (int i = 0; i < count - 1; i++)
+    values[i] = values[i + 1];
 } // insertToLeft()
+
+void moveToRight()
+{
+  rightSibling->insert(values[count - 1]);
+  count--;
+} // moveToRight()
