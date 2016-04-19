@@ -24,6 +24,7 @@ public:
   LeafNode* split();
   void insertDirectly(int value);
   void moveToLeft();
+  void moveToRight();
 }; //LeafNode class
 
 #endif
