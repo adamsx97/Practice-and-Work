@@ -34,6 +34,7 @@ int LeafNode::getMinimum()const
 
 LeafNode* LeafNode::insert(int value)
 {
+  LeafNode* n = NULL;
   if (count < leafSize)
   {
     insertDirectly(value);
@@ -43,18 +44,14 @@ LeafNode* LeafNode::insert(int value)
   {
     if (leftSibling && leftSibling->getCount() < leafSize)
     {
-      if (value < this->getMinimum())
-        leftSibling->insert(value);
-      else // if value is not the smallest one
-      {
         moveToLeft();
         insertDirectly(value);
-      }
+      
     } // insert to left
-    else if(rightSibling && rightSibling->getCount < leafSize)
+    else if(rightSibling && rightSibling->getCount() < leafSize)
     {
       if (value > values[count - 1])
-        rightSibling->insert(value);
+        rightSibling->insert(values[count--]);
       else // if value is not the biggest one
       {
         moveToRight();
@@ -64,10 +61,10 @@ LeafNode* LeafNode::insert(int value)
     else // no place in current leaf node and left&right sibling
     {
       insertDirectly(value);
-      return split();
+      n = split();
     }
   }
-  return NULL; // to avoid warnings for now.
+  return n; // to avoid warnings for now.
 }  // LeafNode::insert()
 
 void LeafNode::print(Queue <BTreeNode*> &queue)
@@ -81,12 +78,13 @@ void LeafNode::print(Queue <BTreeNode*> &queue)
 LeafNode* LeafNode::split()
 {
   LeafNode *newNode = new LeafNode(leafSize, parent, this, rightSibling);
-  this->rightSibling = newNode;
+  
   if(rightSibling)
-    rightSibling->leftSibling = setLeftSibling(newNode);
-  for (int i = count / 2; i < count; i++)
+    rightSibling->setLeftSibling(newNode);
+  rightSibling=newNode;
+  for (int i = (count) / 2; i <= leafSize; i++)
     newNode->insert(values[i]);
-  count = count / 2;
+  count--;
   return newNode;
 } // split()
 
@@ -94,7 +92,7 @@ void LeafNode::insertDirectly(int value)
 {
   if (count == 0)
   {
-    values[0] = value;
+    values[count] = value;
     count++;
     return;
   } // if no element in curr leaf node
@@ -121,9 +119,10 @@ void LeafNode::moveToLeft()
   leftSibling->insert(values[0]);
   for (int i = 0; i < count - 1; i++)
     values[i] = values[i + 1];
+  count--;
 } // insertToLeft()
 
-void moveToRight()
+void LeafNode::moveToRight()
 {
   rightSibling->insert(values[count - 1]);
   count--;
