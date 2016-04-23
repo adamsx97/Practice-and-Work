@@ -6,12 +6,23 @@
 using namespace std;
 
 /*
-int count;
-int leafSize;
-int *values;
-InternalNode *parent;
-BTreeNode *leftSibling;
-BTreeNode *rightSibling;
+  int *values;
+
+  int count;
+  int leafSize;
+  InternalNode *parent;
+  BTreeNode *leftSibling;
+  BTreeNode *rightSibling;
+
+  int getCount() const;
+  BTreeNode* getLeftSibling();
+  virtual int getMinimum()const = 0;
+  BTreeNode* getRightSibling();
+  virtual BTreeNode* insert(int value) = 0;
+  virtual void print(Queue <BTreeNode*> &queue) = 0;
+  void setLeftSibling(BTreeNode *left);
+  void setParent(InternalNode *p);
+  void setRightSibling(BTreeNode *right);
 */
 
 LeafNode::LeafNode(int LSize, InternalNode *p,
@@ -34,7 +45,6 @@ int LeafNode::getMinimum()const
 
 LeafNode* LeafNode::insert(int value)
 {
-  LeafNode* n = NULL;
   if (count < leafSize)
   {
     insertDirectly(value);
@@ -44,9 +54,14 @@ LeafNode* LeafNode::insert(int value)
   {
     if (leftSibling && leftSibling->getCount() < leafSize)
     {
+      if (value < this->getMinimum())
+        leftSibling->insert(value);
+      else
+      {
+
         moveToLeft();
         insertDirectly(value);
-      
+      }
     } // insert to left
     else if(rightSibling && rightSibling->getCount() < leafSize)
     {
@@ -61,10 +76,10 @@ LeafNode* LeafNode::insert(int value)
     else // no place in current leaf node and left&right sibling
     {
       insertDirectly(value);
-      n = split();
+      return split();
     }
   }
-  return n; // to avoid warnings for now.
+  return NULL; // to avoid warnings for now.
 }  // LeafNode::insert()
 
 void LeafNode::print(Queue <BTreeNode*> &queue)
@@ -78,13 +93,13 @@ void LeafNode::print(Queue <BTreeNode*> &queue)
 LeafNode* LeafNode::split()
 {
   LeafNode *newNode = new LeafNode(leafSize, parent, this, rightSibling);
-  
+
   if(rightSibling)
     rightSibling->setLeftSibling(newNode);
-  rightSibling=newNode;
+  rightSibling = newNode;
   for (int i = (count) / 2; i <= leafSize; i++)
     newNode->insert(values[i]);
-  count--;
+  count /= 2;
   return newNode;
 } // split()
 
