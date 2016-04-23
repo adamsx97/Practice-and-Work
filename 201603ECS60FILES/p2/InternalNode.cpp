@@ -133,7 +133,7 @@ InternalNode* InternalNode::split()
   
 void InternalNode::moveToLeft()
 {
-  (InternalNode*)leftSibling->insert(children[0]);
+  ((InternalNode*)leftSibling)->insert(children[0]);
   for (int i = 0; i < count - 1; i++)
     children[i] = children[i + 1];
   count--;
@@ -142,7 +142,7 @@ void InternalNode::moveToLeft()
 
 void InternalNode::moveToRight()
 {
-  (InternalNode*)rightSibling->insert(children[count - 1]);
+  ((InternalNode*)rightSibling)->insert(children[count - 1]);
   count--;
   updateKeys();
 } // moveToRight()
