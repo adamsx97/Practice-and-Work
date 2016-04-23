@@ -7,13 +7,11 @@ using namespace std;
   int internalSize;
   BTreeNode **children;
   int *keys;
-
   int count;
   int leafSize;
   InternalNode *parent;
   BTreeNode *leftSibling;
   BTreeNode *rightSibling;
-
   BTreeNode(int LSize, InternalNode *p, BTreeNode *left, BTreeNode *right);
   virtual ~BTreeNode() {}  
   int getCount() const;
@@ -120,9 +118,9 @@ void InternalNode::print(Queue <BTreeNode*> &queue)
 
 } // InternalNode::print()
 
-LeafNode* LeafNode::split()
+InternalNode* InternalNode::split()
 {
-  LeafNode *newNode = new LeafNode(internalSize, leafSize, parent, this, rightSibling);
+  InternalNode *newNode = new InternalNode(internalSize, leafSize, parent, this, rightSibling);
 
   if(rightSibling)
     rightSibling->setLeftSibling(newNode);
@@ -133,18 +131,18 @@ LeafNode* LeafNode::split()
   return newNode;
 } // split()
   
-void LeafNode::moveToLeft()
+void InternalNode::moveToLeft()
 {
-  leftSibling->insert(children[0]);
+  (InternalNode*)leftSibling->insert(children[0]);
   for (int i = 0; i < count - 1; i++)
     children[i] = children[i + 1];
   count--;
   updateKeys();
 } // insertToLeft()
 
-void LeafNode::moveToRight()
+void InternalNode::moveToRight()
 {
-  rightSibling->insert(children[count - 1]);
+  (InternalNode*)rightSibling->insert(children[count - 1]);
   count--;
   updateKeys();
 } // moveToRight()
@@ -154,4 +152,3 @@ void InternalNode::updateKeys()
   for (int i = 0; i < count; i++)
     keys[i] = children[i]->getMinimum();
 } // updateKeys()
-
