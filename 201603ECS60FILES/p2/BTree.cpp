@@ -20,7 +20,7 @@ void BTree::insert(const int value)
       NULL, NULL, NULL);
     n->insert(root, ptr);
     root = n;
-  // students must write this
+  } // Change root if it splited
 } // BTree::insert()
 
 

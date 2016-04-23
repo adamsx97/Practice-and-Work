@@ -9,6 +9,16 @@
   InternalNode *parent;
   BTreeNode *leftSibling;
   BTreeNode *rightSibling;
+  int getCount() const;
+  
+  BTreeNode* getLeftSibling();
+  virtual int getMinimum()const = 0;
+  BTreeNode* getRightSibling();
+  virtual BTreeNode* insert(int value) = 0;
+  virtual void print(Queue <BTreeNode*> &queue) = 0;
+  void setLeftSibling(BTreeNode *left);
+  void setParent(InternalNode *p);
+  void setRightSibling(BTreeNode *right);
 */
 
 class LeafNode:public BTreeNode

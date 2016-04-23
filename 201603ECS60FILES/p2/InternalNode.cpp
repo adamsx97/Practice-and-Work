@@ -3,6 +3,30 @@
 
 using namespace std;
 
+/*
+  int internalSize;
+  BTreeNode **children;
+  int *keys;
+
+  int count;
+  int leafSize;
+  InternalNode *parent;
+  BTreeNode *leftSibling;
+  BTreeNode *rightSibling;
+
+  BTreeNode(int LSize, InternalNode *p, BTreeNode *left, BTreeNode *right);
+  virtual ~BTreeNode() {}  
+  int getCount() const;
+  BTreeNode* getLeftSibling();
+  virtual int getMinimum()const = 0;
+  BTreeNode* getRightSibling();
+  virtual BTreeNode* insert(int value) = 0;
+  virtual void print(Queue <BTreeNode*> &queue) = 0;
+  void setLeftSibling(BTreeNode *left);
+  void setParent(InternalNode *p);
+  void setRightSibling(BTreeNode *right);
+*/
+
 InternalNode::InternalNode(int ISize, int LSize,
   InternalNode *p, BTreeNode *left, BTreeNode *right) :
   BTreeNode(LSize, p, left, right), internalSize(ISize)
@@ -23,19 +47,64 @@ int InternalNode::getMinimum()const
 
 InternalNode* InternalNode::insert(int value)
 {
-  // students must write this
+  updateKeys();
+  BTreeNode* newNode = NULL;
+
+  int flag = 1;
+  for (int i = 0; i < count; i++)
+    if (value < keys[i])
+    {
+      i = (i == 0) ? i : i - 1;
+      newNode = children[i]->insert(value);
+      flag = 0;
+    } // find child to insert
+  if (flag)
+    newNode = children[count - 1]->insert(value); // insert at the largest if larger than all
+  if (newNode)
+  {
+    if (count < internalSize)
+      insert(newNode);
+    else
+      return split();
+  } // if children splits add newNode
+  updateKeys();
   return NULL; // to avoid warnings for now.
 } // InternalNode::insert()
 
 void InternalNode::insert(BTreeNode *oldRoot, BTreeNode *node2)
 { // Node must be the root, and node1
-  // students must write this
+  updateKeys();
+  insert(oldRoot);
+  insert(node2);
+  updateKeys();
 } // InternalNode::insert()
 
 void InternalNode::insert(BTreeNode *newNode) // from a sibling
 {
-  // students may write this
-} // InternalNode::insert()
+  updateKeys();
+  if (count == 0)
+  {
+    children[count] = newNode;
+    count++;
+    return;
+  } // if no element in curr leaf node
+
+  int flag = 1;
+  for (int i = 0; i < count; i++)
+    if (newNode->getMinimum() < keys[i])
+    {
+      for (int j = i; j < count; j++)
+        children[j] = children[j + 1];
+      children[i] = newNode;
+      flag = 0;
+      break;
+    }
+  if (flag)
+    children[count] = newNode;
+  count++;
+  updateKeys();
+  return;
+} // InternalNode::insert() insertDirectly()
 
 void InternalNode::print(Queue <BTreeNode*> &queue)
 {
@@ -51,4 +120,38 @@ void InternalNode::print(Queue <BTreeNode*> &queue)
 
 } // InternalNode::print()
 
+LeafNode* LeafNode::split()
+{
+  LeafNode *newNode = new LeafNode(internalSize, leafSize, parent, this, rightSibling);
+
+  if(rightSibling)
+    rightSibling->setLeftSibling(newNode);
+  rightSibling = newNode;
+  for (int i = (count) / 2; i <= internalSize; i++)
+    newNode->insert(children[i]);
+  count /= 2;
+  return newNode;
+} // split()
+  
+void LeafNode::moveToLeft()
+{
+  leftSibling->insert(children[0]);
+  for (int i = 0; i < count - 1; i++)
+    children[i] = children[i + 1];
+  count--;
+  updateKeys();
+} // insertToLeft()
+
+void LeafNode::moveToRight()
+{
+  rightSibling->insert(children[count - 1]);
+  count--;
+  updateKeys();
+} // moveToRight()
+
+void InternalNode::updateKeys()
+{
+  for (int i = 0; i < count; i++)
+    keys[i] = children[i]->getMinimum();
+} // updateKeys()
 
