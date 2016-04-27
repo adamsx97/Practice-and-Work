@@ -20,7 +20,6 @@ int main(int argc, char *argv[])
     tree.print();
     fgets(s, 80, stdin);
   } // while
-
   tree.print();
   return 0;
 }  // main

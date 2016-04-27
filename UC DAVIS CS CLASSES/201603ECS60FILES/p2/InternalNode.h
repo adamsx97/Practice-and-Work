@@ -37,7 +37,7 @@ public:
   void print(Queue <BTreeNode*> &queue);
   void moveToLeft();
   void moveToRight();
-  InternalNode* split();
+  InternalNode* split(BTreeNode* newNode);
   void updateKeys();
 }; // InternalNode class
 

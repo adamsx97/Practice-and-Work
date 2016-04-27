@@ -31,7 +31,7 @@ public:
   LeafNode* insert(int value); // returns pointer to new Leaf if splits
   // else NULL
   void print(Queue <BTreeNode*> &queue);
-  LeafNode* split();
+  LeafNode* split(int value);
   void insertDirectly(int value);
   void moveToLeft();
   void moveToRight();

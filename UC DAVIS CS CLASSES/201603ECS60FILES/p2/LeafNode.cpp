@@ -66,7 +66,7 @@ LeafNode* LeafNode::insert(int value)
     else if(rightSibling && rightSibling->getCount() < leafSize)
     {
       if (value > values[count - 1])
-        rightSibling->insert(values[count--]);
+        rightSibling->insert(value);
       else // if value is not the biggest one
       {
         moveToRight();
@@ -75,8 +75,7 @@ LeafNode* LeafNode::insert(int value)
     } // insert to right
     else // no place in current leaf node and left&right sibling
     {
-      insertDirectly(value);
-      return split();
+      return split(value);
     }
   }
   return NULL; // to avoid warnings for now.
@@ -90,16 +89,28 @@ void LeafNode::print(Queue <BTreeNode*> &queue)
   cout << endl;
 } // LeafNode::print()
 
-LeafNode* LeafNode::split()
+LeafNode* LeafNode::split(int value)
 {
+  int last, i;
+  if (value > values[count - 1])
+    last = value;
+  else
+  {
+    last = values[count - 1];
+    for (i = count - 2; i > 0 && values[i] > value; i--)
+      values[i + 1] = values[i];
+    values[i + 1] = value;
+  }
+
   LeafNode *newNode = new LeafNode(leafSize, parent, this, rightSibling);
 
   if(rightSibling)
     rightSibling->setLeftSibling(newNode);
   rightSibling = newNode;
-  for (int i = (count) / 2; i <= leafSize; i++)
+  for (i = (leafSize + 1) / 2; i < leafSize; i++)
     newNode->insert(values[i]);
-  count /= 2;
+  count = (leafSize + 1 ) / 2;
+  newNode->insert(last);
   return newNode;
 } // split()
 
@@ -112,19 +123,11 @@ void LeafNode::insertDirectly(int value)
     return;
   } // if no element in curr leaf node
 
-  int flag = 1;
-  for (int i = 0; i < count; i++)
-    if (value < values[i])
-    {
-      for (int j = i; j < count; j++)
-        values[j] = values[j + 1];
-      values[i] = value;
-      flag = 0;
-      break;
-    }
-  if (flag)
-    values[count] = value;
-  count++;
+  int i;
+  for (i = count - 1; i >= 0 && value < values[i]; i--)
+    values[i + 1] = values[i];
+  values[i + 1] = value;
+  count++; 
   return;
 } // insertDirectly()
 
