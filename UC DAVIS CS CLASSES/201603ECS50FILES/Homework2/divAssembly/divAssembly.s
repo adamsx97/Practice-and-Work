@@ -51,12 +51,12 @@ else_start:
     # remaind = 0;
     movl $0, %edx
     # edx will hold i
-    
+    d
     for_loop_start:
         # for (int i = 0; i < 32; ++i)
-        cmpl %edx, $32
-        # jump if 32 - i <= 0
-            jle for_loop_end
+        cmpl $32, %edx
+        # jump if i - 32 >= 0
+            jge for_loop_end
 
         shl quotient
         # quotient <<= 1;
@@ -68,8 +68,8 @@ else_start:
         if_start1:
             and $0x80000000, %ebx
             # buf & 0x80000000
-            cmpl %ebx, $0
-                # jump if 0 - ebx != 0
+            cmpl $0, %ebx
+                # jump if ebx - 0 != 0
                 jnz if_end1
             add $1, remaind
             # remaind++;
