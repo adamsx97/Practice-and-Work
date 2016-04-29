@@ -51,7 +51,7 @@ else_start:
     # remaind = 0;
     movl $0, %edx
     # edx will hold i
-    d
+    
     for_loop_start:
         # for (int i = 0; i < 32; ++i)
         cmpl $32, %edx
