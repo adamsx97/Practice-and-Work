@@ -22,7 +22,7 @@ if_start:
     movl buf, %ecx
     cmpl %ecx, divisor
     # jump if divisor - buf <= 0
-        jle if_end
+        jbe if_end
     movl $0, quotient
     # quotient = 0;
     movl buf, %ecx
@@ -61,7 +61,7 @@ else_start:
         # for (int i = 0; i < 32; ++i)
         cmpl $32, %edx
         # jump if i - 32 >= 0
-            jge for_loop_end
+            jae for_loop_end
 
         shll $1, quotient
         # quotient <<= 1;
@@ -85,7 +85,7 @@ else_start:
             movl remaind, %ecx
             cmpl %ecx, divisor
             # jump if divisor - remaind > 0
-                jg if_end2
+                ja if_end2
             movl divisor, %ecx
             sub %ecx, remaind
             # remaind -= divisor;
