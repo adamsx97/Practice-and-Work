@@ -16,17 +16,20 @@ movl dividend, %ecx
 movl %ecx, buf
 
 if_start:
-    cmpl buf, divisor
+    movl buf, %ecx
+    cmpl %ecx, divisor
     # buf < divisor
     # divisor - fub > 0
         jl if_end
     movl $0, quotient
-    movl buf, remaind
+    movl buf, %ecx
+    movl %ecx, remaind
 
 if_end:
 
 else_if_start:
-    cmpl buf, divisor
+    movl buf, %ecx
+    cmpl %ecx, divisor
     # buf == divisor
         jnz else_if_end
     movl $1, quotient
@@ -42,7 +45,7 @@ else_start:
         # i < 32
         # 32 - i > 0
         cmpl %edx, $32
-        jl for_loop_end
+            jl for_loop_end
 
     shl quotient
     shl remaind
@@ -55,11 +58,13 @@ else_start:
       if_end1:
 
       if_start2:
-        cmpl remaind, divisor
+        movl remaind, %ecx
+        cmpl %ecx, divisor
         # remaind >= divisor
         # divisor - remaind <= 0
         jle if_end2
-        sub divisor, remaind
+        movl divisor, %ecx
+        sub %ecx, remaind
         add $1, quotient
       if_end2:
     shl buf
