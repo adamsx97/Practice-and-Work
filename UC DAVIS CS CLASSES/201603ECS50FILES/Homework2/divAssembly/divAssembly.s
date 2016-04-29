@@ -58,9 +58,9 @@ else_start:
         # jump if i - 32 >= 0
             jge for_loop_end
 
-        shl quotient
+        shl $1, quotient
         # quotient <<= 1;
-        shl remaind
+        shl $1, remaind
         # remaind <<= 1;
 
         #if ((buf & 0x80000000) != 0)
@@ -88,7 +88,7 @@ else_start:
             # quotient++;
         if_end2:
 
-        shl buf
+        shl $1, buf
         # buf <<= 1;
     for_loop_end:
 else_end:
