@@ -28,6 +28,8 @@ if_start:
     movl buf, %ecx
     movl %ecx, remaind
     # remaind = buf;
+    movl quotient, %eax
+    movl remaind, %edx
     jmp done
 if_end:
 
@@ -41,6 +43,8 @@ else_if_start:
     # quotient = 1;
     movl $0, remaind
     # remaind = 0;
+    movl quotient, %eax
+    movl remaind, %edx
     jmp done
 else_if_end:
 
@@ -70,8 +74,8 @@ else_start:
             and $0x80000000, %ebx
             # buf & 0x80000000
             cmpl $0, %ebx
-                # jump if ebx - 0 != 0
-                jnz if_end1
+                # jump if ebx - 0 == 0
+                jz if_end1
             add $1, remaind
             # remaind++;
         if_end1:
