@@ -8,12 +8,13 @@ quotient: .long 0
 
 remaind: .long 0
 
-buf: .long 0
 
 .text
 _start:
 
-movl dividend, buf
+movl dividend, %ecx
+movl %ecx, buf
+
 if_start:
     cmpl buf, divisor
     # buf < divisor
