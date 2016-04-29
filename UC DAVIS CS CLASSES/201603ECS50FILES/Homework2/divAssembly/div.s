@@ -1,19 +1,14 @@
 .global _start
 .data
-dividend:
-  .long 0
+dividend: .long 0
 
-divisor:
-  .long 0
+divisor: .long 0
 
-quotient:
-  .long 0
+quotient: .long 0
 
-remaind:
-  .long 0
+remaind: .long 0
 
-buf:
-  .long 0
+buf: .long 0
 
 .text
 _start:
