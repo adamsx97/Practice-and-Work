@@ -97,7 +97,7 @@ LeafNode* LeafNode::split(int value)
   else
   {
     last = values[count - 1];
-    for (i = count - 2; i > 0 && values[i] > value; i--)
+    for (i = count - 2; i >= 0 && values[i] > value; i--)
       values[i + 1] = values[i];
     values[i + 1] = value;
   }

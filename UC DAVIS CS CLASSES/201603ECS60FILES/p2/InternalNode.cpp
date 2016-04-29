@@ -55,6 +55,7 @@ InternalNode* InternalNode::insert(int value)
       i = (i == 0) ? i : i - 1;
       newNode = children[i]->insert(value);
       flag = 0;
+      break;
     } // find child to insert
   if (flag)
     newNode = children[count - 1]->insert(value); // insert at the largest if larger than all
@@ -156,7 +157,7 @@ InternalNode* InternalNode::split(BTreeNode* newNode)
   else
   {
     last = children[count - 1];
-    for (i = count - 2; i > 0 && keys[i] > newNode->getMinimum(); i--)
+    for (i = count - 2; i >= 0 && keys[i] > newNode->getMinimum(); i--)
       children[i + 1] = children[i];
     children[i + 1] = newNode;
     updateKeys();
