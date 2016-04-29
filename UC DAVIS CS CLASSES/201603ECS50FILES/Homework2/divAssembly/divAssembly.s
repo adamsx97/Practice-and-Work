@@ -28,7 +28,7 @@ if_start:
     movl buf, %ecx
     movl %ecx, remaind
     # remaind = buf;
-
+    jmp done
 if_end:
 
 else_if_start:
@@ -41,7 +41,7 @@ else_if_start:
     # quotient = 1;
     movl $0, remaind
     # remaind = 0;
-
+    jmp done
 else_if_end:
 
 else_start:
