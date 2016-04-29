@@ -91,8 +91,12 @@ else_start:
 
         shll $1, buf
         # buf <<= 1;
+        add $1, %edx
+        # i++;
         jmp for_loop_start
     for_loop_end:
+    movl quotient, %eax
+    movl remaind, %edx
 else_end:
 
 done:
