@@ -91,6 +91,7 @@ else_start:
 
         shll $1, buf
         # buf <<= 1;
+        jmp for_loop_start
     for_loop_end:
 else_end:
 
