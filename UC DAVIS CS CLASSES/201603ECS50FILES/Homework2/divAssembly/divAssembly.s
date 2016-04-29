@@ -8,6 +8,7 @@ quotient: .long 0
 
 remaind: .long 0
 
+buf: .long 0
 
 .text
 _start:
