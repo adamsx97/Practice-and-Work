@@ -1,0 +1,8 @@
+The testhw and the Testing directory are now available for use.
+Copy testhw to one of your own directories.
+There is no need to copy the Testing directory.
+testhw takes only one argument--the directory that holds your BST2.*,
+and QuadraticProbingPtr.* source code.
+The results are placed in the results.txt file in the directory with the source code in it.
+
+Sean
