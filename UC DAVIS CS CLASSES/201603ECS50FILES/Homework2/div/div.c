@@ -1,36 +1,36 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void good_div(unsigned int dividend, unsigned int divisor, unsigned int* quotient, unsigned int *remaind)
+void good_div(unsigned int dividend, unsigned int divisor, unsigned int &quotient, unsigned int &remaind)
 {
     if (dividend < divisor)
     {
-    	*quotient = 0;
-    	*remaind = dividend;
+    	quotient = 0;
+    	remaind = dividend;
     	return;
     }
 
     if (dividend == divisor)
     {
-    	*quotient = 1;
-    	*remaind = 0;
+    	quotient = 1;
+    	remaind = 0;
     	return;
     }
 
-    *quotient = 0;
-    *remaind = 0;
+    quotient = 0;
+    remaind = 0;
 
     for (int i = 0; i < 32; ++i)
     {
-        (*quotient) <<= 1;
-        (*remaind) <<= 1;
+        (quotient) <<= 1;
+        (remaind) <<= 1;
 
     	if ((dividend & 0x80000000) != 0)
-    		(*remaind)++;
-    	if ((*remaind) >= divisor)
+    		remaind++;
+    	if (remaind >= divisor)
     	{
-    		(*remaind) -= divisor;
-            (*quotient)++;
+    		remaind -= divisor;
+            quotient++;
     	}
         dividend <<= 1;
     }
