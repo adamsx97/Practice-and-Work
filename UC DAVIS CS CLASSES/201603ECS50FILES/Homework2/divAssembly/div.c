@@ -31,8 +31,8 @@ int main(int argc, char* argv[])
 
       if ((buf & 0x80000000) != 0)
         remaind++;
-     if (remaind >= divisor)
-     {
+      if (remaind >= divisor)
+      {
         remaind -= divisor;
         quotient++;
       }

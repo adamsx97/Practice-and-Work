@@ -1,5 +1,5 @@
-        #include "QuadraticProbingPtr.h"
-	#include "QuadraticProbing.h"
+#include "QuadraticProbingPtr.h"
+#include "QuadraticProbing.h"
 
 
         /**
@@ -86,13 +86,13 @@
                 // Create new double-sized, empty table
             array.resize( nextPrime( 2 * oldArray.size( ) ) );
             for( int j = 0; j < array.size( ); j++ )
-                array[ j ].info = 1;
+                array[ j ] = NULL;
 
                 // Copy table over
             currentSize = 0;
             for( int i = 0; i < oldArray.size( ); i++ )
-                if( oldArray.isActive(i) )
-                    insert( oldArray[ i ].element );
+                if( oldArray[i] != NULL )
+                    insert( *oldArray[ i ]);
         }
 
         /**
@@ -105,8 +105,8 @@
 /* 1*/      int collisionNum = 0;
 /* 2*/      int currentPos = hash( x, array.size( ) );
 
-/* 3*/      while( array[ currentPos ].info != 1 &&
-                   array[ currentPos ].element != x )
+/* 3*/      while( array[ currentPos ] != NULL &&
+                   *array[ currentPos ] != x )
             {
 /* 4*/          currentPos += 2 * ++collisionNum - 1;  // Compute ith probe
 /* 5*/          if( currentPos >= array.size( ) )
@@ -125,7 +125,7 @@
         {
             int currentPos = findPos( x );
             if( isActive( currentPos ) )
-                array.remove(currentPos);
+                array[currentPos] = &ITEM_NOT_FOUND;
         }
 
         /**
@@ -147,7 +147,7 @@
         {
             currentSize = 0;
             for( int i = 0; i < array.size( ); i++ )
-                array[ i ].info = 1;
+                array[ i ]= NULL;
         }
 
         /**
@@ -172,7 +172,7 @@
         template <class HashedObj>
         bool QuadraticPtrHashTable<HashedObj>::isActive( int currentPos ) const
         {
-            return array.isActive(currentPos);
+            return array[currentPos] != NULL && *array[currentPos] != ITEM_NOT_FOUND;
         }
 
         /**
@@ -203,5 +203,3 @@
             if( key < 0 ) key = -key;
             return key % tableSize;
         }
-
-
