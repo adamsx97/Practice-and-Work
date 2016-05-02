@@ -42,6 +42,6 @@ int main(int argc, char* argv[])
 	sscanf(argv[1],"%u", &dividend);
     sscanf(argv[2],"%u", &divisor);
 	good_div(dividend, divisor, quotient, remaind);
-	printf("%u / %u = %u R %u \n", dividend, divisor, &quotient, &remaind);
+	printf("%u / %u = %u R %u \n", dividend, divisor, quotient, remaind);
 	return 0;
 } /* main() */
