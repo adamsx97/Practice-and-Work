@@ -1,4 +1,5 @@
         #include "QuadraticProbingPtr.h"
+	#include "QuadraticProbing.h"
 
 
         /**
@@ -54,7 +55,6 @@
         QuadraticPtrHashTable<HashedObj>::~QuadraticPtrHashTable()
         {
             makeEmpty( );
-            array.makeEmpty();
         }
 
         /**

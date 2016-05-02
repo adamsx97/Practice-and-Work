@@ -49,5 +49,6 @@
             int hash( int key, int tableSize ) const;
             void rehash( );
         };
-
+	
+	#include "QuadraticProbingPtr.cpp"
         #endif
