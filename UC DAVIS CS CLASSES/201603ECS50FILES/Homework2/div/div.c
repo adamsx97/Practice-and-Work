@@ -40,8 +40,8 @@ int main(int argc, char* argv[])
 {
 	unsigned int dividend, divisor;
 	unsigned int *quotient = malloc(sizeof(unsigned int)), *remaind = malloc(sizeof(unsigned int));
-	dividend = atoi(argv[1]);
-	divisor = atoi(argv[2]);
+	sscanf(argv[1],"%u", &dividend);
+    sscanf(argv[2],"%u", &divisor);
 	good_div(dividend, divisor, quotient, remaind);
 	printf("%u / %u = %u R %u \n", dividend, divisor, *quotient, *remaind);
 	return 0;

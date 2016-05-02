@@ -57,5 +57,5 @@
             void rehash( );
         };
 
-        #include "QuadraticProbing.cpp"
+        //#include "QuadraticProbing.cpp"
         #endif
