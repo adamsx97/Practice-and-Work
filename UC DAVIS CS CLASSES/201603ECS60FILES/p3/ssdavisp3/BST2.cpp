@@ -294,12 +294,48 @@ void BinarySearchTree<Comparable>::printRange(const Comparable &x, const Compara
 
 {
   // Students must write this.
-  BinaryNode<Comparable> *ptr;
-  find(x, ptr);
-  while (ptr)
-  {
-    printTree(x);
+  //BinaryNode<Comparable> *ptr;
+  //find(x, ptr);
+  //while (ptr)
+  //{
+    //printTree(x);
     
+  //}
+  BinaryNode<Comparable> *ptr;
+  int lower_bound=0;
+  int upper_bound=0;
+  if(x>y)
+  {
+    upper_bound=x;
+    lower_bound=y;
+  }
+  else
+  {
+    lower_bound=x;
+    upper_bound=y;
+   
+  }
+    if(ptr == NULL)
+    return;
+
+  if(ptr->element >= lower_bound && ptr->element <= upper_bound)
+  {
+    printTree(ptr->left);
+    cout<< ptr->element <<" ";
+    printTree(ptr->right);
+  }
+  else
+  {
+    if(ptr->element >= lower_bound)
+    {
+      printTree(ptr->left);
+    }
+    if(ptr->element <= upper_bound)
+    {
+      
+      printTree(ptr->right);
+
+    }
   }
 }
 
