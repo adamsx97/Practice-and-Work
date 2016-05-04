@@ -299,6 +299,7 @@ void BinarySearchTree<Comparable>::printRange(const Comparable &x, const Compara
     printRangeWithNode(x, y, ptr);
   else
     printRangeWithNode(y, x, ptr);
+  cout << endl;
 }
 
 template <class Comparable>
