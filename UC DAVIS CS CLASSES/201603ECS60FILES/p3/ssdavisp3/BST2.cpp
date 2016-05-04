@@ -295,7 +295,6 @@ void BinarySearchTree<Comparable>::printRange(const Comparable &x, const Compara
 {
   // Students must write this.
   BinaryNode<Comparable> *ptr = root;
-  int temp;
   if (x < y)
     printRangeWithNode(x, y, ptr);
   else
