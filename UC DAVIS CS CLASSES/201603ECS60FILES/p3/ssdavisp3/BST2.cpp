@@ -298,6 +298,7 @@ void BinarySearchTree<Comparable>::printRange(const Comparable &x, const Compara
   printRangeWithNode(x, y, ptr);
 }
 
+template <class Comparable>
 void BinarySearchTree<Comparable>::printRangeWithNode(const Comparable &x, const Comparable &y, BinaryNode *curr) const
 {
   if (curr->left)
