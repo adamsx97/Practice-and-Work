@@ -53,7 +53,7 @@ class BinarySearchTree
     void insert( const Comparable & x );
     void remove( const Comparable & x );
     void printRange(const Comparable &x, const Comparable &y) const;
-    void printRangeWithNode(const Comparable &x, const Comparable &y, BinaryNode *curr); const
+    void printRangeWithNode(const Comparable &x, const Comparable &y, BinaryNode *curr) const; 
 
     const BinarySearchTree & operator=( const BinarySearchTree & rhs );
 
