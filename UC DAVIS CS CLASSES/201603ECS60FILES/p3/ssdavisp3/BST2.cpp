@@ -302,14 +302,12 @@ void BinarySearchTree<Comparable>::printRange(const Comparable &x, const Compara
     
   //}
   BinaryNode<Comparable> *ptr = root;
-
-  if(ptr->element >= x && ptr->element <= y)
-  {
-    if (ptr->left)
-      printRange(ptr->left->element, y);
+  if (ptr->left)
+    printRange(ptr->left->element, y);
+  if (ptr->element >= x && ptr->element <= y)
     cout<< ptr->element <<" ";
-    if (ptr->right)
-      printRange(ptr->right->element, y);
+  if (ptr->right)
+    printRange(ptr->right->element, y);
   }
 }
 
