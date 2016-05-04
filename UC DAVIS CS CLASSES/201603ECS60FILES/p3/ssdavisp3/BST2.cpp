@@ -302,13 +302,8 @@ void BinarySearchTree<Comparable>::printRange(const Comparable &x, const Compara
     
   //}
   BinaryNode<Comparable> *ptr = root;
-  
-  find(x, ptr);
 
-  if(ptr == NULL)
-    return;
-
-  if(ptr->element <= y)
+  if(ptr->element >= x && ptr->element <= y)
   {
     if (ptr->left)
       printRange(ptr->left->element, y);
