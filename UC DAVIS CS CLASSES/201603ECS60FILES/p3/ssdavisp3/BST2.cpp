@@ -310,9 +310,11 @@ void BinarySearchTree<Comparable>::printRange(const Comparable &x, const Compara
 
   if(ptr->element <= y)
   {
-    printRange(ptr->left->element, y);
+    if (ptr->left)
+      printRange(ptr->left->element, y);
     cout<< ptr->element <<" ";
-    printRange(ptr->right->element, y);
+    if (ptr->right)
+      printRange(ptr->right->element, y);
   }
 }
 
