@@ -1,3 +1,4 @@
+/*
 int** matMult(int** mat_a, int rows_mat_a, int cols_mat_a, int** mat_b, int rows_mat_b, int cols_mat_b)
 {
   int** mat_c;
@@ -16,8 +17,10 @@ int** matMult(int** mat_a, int rows_mat_a, int cols_mat_a, int** mat_b, int rows
   }
   return mat_c;
 }
+*/
 
 .global matMult
+
 .equ wordsize, 4
 
 matMult:
@@ -77,7 +80,18 @@ rows_for_loop_start:
   movl %eax, (%edx, %ecx, wordsize)
   movl %edx, eax #restoring C still
 
+  movl $0, %edx
+  # j = 0
 
+  cols_for_loop_start:
+    # for (j = 0; j < cols_mat_b; j++)
+    cmpl cols_mat_b(%ebp), %edx
+      # jump if edx - cols_mat_b > 0
+      jge cols_for_loop_end
+
+    
+
+  cols_for_loop_end:
 
   incl %ecx # i++
   jmp rows_for_loop_start
