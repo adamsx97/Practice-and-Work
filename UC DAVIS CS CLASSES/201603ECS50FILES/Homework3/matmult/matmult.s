@@ -56,22 +56,22 @@ matMult:
   # save c
   movl %eax, c(%ebp)
 
-  movl $0, %edx
+  movl $0, i(%ebp)
   # i = 0
 
   malloc_c_for_loop_start:
     #  for(i = 0; i < num_rows_a; i++)
+    movl i(%ebp), %edx
     cmpl num_rows_a(%ebp), %edx
       # jump if ecx - num_rows_a > 0
       jge malloc_c_for_loop_end
 
-    movl %edx, i(%ebp)
     movl num_cols_b(%ebp), %ebx
     # malloc(num_cols_b * sizeof(int))
     shll $2, %ebx
     push %ebx
     call malloc
-    addl $wordsize, %esp
+    #addl $wordsize, %esp
 
     # c[i] = (int**)malloc(num_cols_b * sizeof(int));
     movl c(%ebp), %eax #restore C
@@ -80,8 +80,7 @@ matMult:
     .endr
     movl %ebx, (%eax)
 
-    movl i(%ebp), %edx
-    addl $1, %edx # i++
+    incl i(%ebp) # i++
     jmp malloc_c_for_loop_start
 
   malloc_c_for_loop_end:
