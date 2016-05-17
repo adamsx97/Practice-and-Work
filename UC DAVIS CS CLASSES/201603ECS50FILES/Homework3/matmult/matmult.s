@@ -1,152 +1,166 @@
+#int** matMult(int** a, int num_rows_a, int num_cols_a, int** b, int num_rows_b, int num_cols_b)
+#{
+#  int** c;
+#  c = (int*)malloc(num_rows_a * sizeof(int*));
+#
+#  for (i = 0; i < num_rows_a; i++)
+#    c[i] = (int**)malloc(num_cols_b * sizeof(int));
+#
+#  int i, j, k;
+#  for (i = 0; i < num_rows_a; i++)
+#  {
+#    for (j = 0; j < num_cols_b; j++)
+#      {
+#      c[i][j] = 0;
+#      for (k = 0; k < num_cols_a; k++)
+#        c[i][j] = c[i][j] + a[i][k] * b[k][j];
+#      }
+#  }
+#  return c;
+#}
+
+
 .global matMult
-matMult:
 
 .equ wordsize, 4
-.equ num_cols_b, 7*wordsize
-.equ num_rows_b, 6*wordsize
-.equ b, 5*wordsize
-.equ num_cols_a, 4 * wordsize
-.equ num_rows_a, 3 * wordsize
-.equ a, 2 * wordsize
-.equ c, -1*wordsize
-.equ i, -2*wordsize
-.equ j, -3*wordsize
-.equ x, -4*wordsize
-.equ sum, -5*wordsize
 
-prologue:
-  pushl %ebp
+matMult:
+
+# prologue
+  push %ebp
   movl %esp, %ebp
-  
-  .rept 7
-  pushl $0
-  .endr
 
-begin:
+  .equ a, 2*wordsize #(%ebp)
+  .equ b, 3*wordsize #(%ebp)
+  .equ num_rows_a, 4*wordsize #(%ebp)
+  .equ num_cols_a, 5*wordsize #(%ebp)
+  .equ num_rows_b, 6*wordsize #(%ebp)
+  .equ num_cols_b, 7*wordsize #(%ebp)
+  .equ c, -1*wordsize #(%ebp)
+  .equ i, -2*wordsize #(%ebp)
+  .equ j, -3*wordsize #(%ebp)
+  .equ k, -4*wordsize #(%ebp)
+  .equ sum, -5*wordsize #(%ebp)
 
+  #EAX is c
+  #EBX is a
+  #ECX is i
+  #EDX is b
 
-  movl num_rows_a(%ebp), %eax
-  .rept 2
-  addl %eax, %eax
-  .endr
-  pushl %eax
-  call malloc #eax holds a pointer to c which is a pointer to pointers
+  # c = (int*)malloc(num_rows_a * sizeof(int*));
+  movl num_rows_a(%ebp), %eax # get rows
+  shll $2, %eax # num_rows * sizeof(int *)
+  pushl %eax # give malloc its argument
+  call malloc # Call malloc
+
+  # save c
   movl %eax, c(%ebp)
 
-#for loop
-forone:
-  movl num_rows_a(%ebp), %eax
-  cmp i(%ebp), %eax #eax - i*%eax)
-    jle doneone
-  movl num_cols_b(%ebp), %eax
-  .rept 2
-  addl %eax, %eax
-  .endr #numcols * 4
-  push %eax
-  call malloc
-  #eax holds the address of the allocated space 
-  
-  movl c(%ebp), %edx
+  movl $0, %edx
+  # i = 0
 
-  .rept 4
-  addl i(%ebp), %edx #gives &(c[i])
-  .endr
-  movl %eax, (%edx) #c[i] = the address to the space allocated
-  incl i(%ebp)
-  jmp forone
+  malloc_c_for_loop_start:
+    #  for(i = 0; i < num_rows_a; i++)
+    cmpl num_rows_a(%ebp), %edx
+      # jump if ecx - num_rows_a > 0
+      jge malloc_c_for_loop_end
 
-doneone:
+    movl %edx, i(%ebp)
+    movl num_cols_b(%ebp), %ebx
+    # malloc(num_cols_b * sizeof(int))
+    shll $2, %ebx
+    push %ebx
+    call malloc
+    addl $wordsize, %esp
 
-movl $0, i(%ebp)
-  
-loopouter:
-  #check
-  movl i(%ebp), %eax
-  cmp %eax, num_rows_a(%ebp)
-  jle endloopouter
-  #endcheck
+    # c[i] = (int**)malloc(num_cols_b * sizeof(int));
+    movl c(%ebp), %eax #restore C
+    .rept 4
+      addl i(%ebp), %eax # get *c[i]
+    .endr
+    movl %ebx, (%eax)
 
-loopmid:
-  #check
-  movl x(%ebp), %eax
-  cmp %eax, num_cols_b(%ebp)
-  jle endloopmid
-  #endcheck
+    movl i(%ebp), %edx
+    addl $1, %edx # i++
+    jmp malloc_c_for_loop_start
 
-loopin:
-  #check IF FALSE
-  movl j(%ebp), %eax
-  cmp %eax, num_rows_b(%ebp)
-  jle endloopin
-  #endcheck
-  #body
+  malloc_c_for_loop_end:
 
-  movl a(%ebp), %eax # &a[0]
-  .rept 4
-    addl i(%ebp), %eax
-  .endr #&a[i]
-  movl (%eax), %eax #a[i]
-  .rept 4
-  addl j(%ebp), %eax
-  .endr #&a[i][j]
-
-  movl (%eax), %eax #a[i][j]
-
-
-  #setting scratch 2
-  movl b(%ebp), %edx #&b[0]
-        
-  .rept 4
-    addl j(%ebp), %edx
-  .endr #&(b[i])
-
-  movl (%edx), %edx #b[i] 
-        
-  .rept 4
-    addl x(%ebp), %edx
-  .endr #&(b[i][j])
-  
-  movl (%edx), %edx #b[i][j]
-  mull %edx #%eax = a[i][j] * b[i][j]
-
-  addl %eax, sum(%ebp) #sum += scratch1 * scratch2
-      
-  #endbody
-      
-  
-  incl j(%ebp)
-  jmp loopin
-
-endloopin:
+  movl $0, i(%ebp)
   movl $0, j(%ebp)
-  movl c(%ebp), %eax #&c[0]
-  .rept 4
-    addl i(%ebp), %eax
-  .endr #&(c[i])
-  
-  movl (%eax), %eax #c[i]
-  
-  .rept 4
-    addl x(%ebp), %eax 
-  .endr #&(c[i][j])
+  movl $0, k(%ebp)
+  for_num_rows_a_loop_start:
+    #for (i = 0; i < num_rows_a; i++)
+    movl i(%ebp), %ecx
+    cmpl num_rows_a(%ebp), %ecx
+      jge for_num_rows_a_loop_end
 
-  movl sum(%ebp), %ecx
-  movl %ecx, (%eax) #c[i][j] = sum
-  movl $0, sum(%ebp)
-  incl x(%ebp)
+    movl $0, j(%ebp)
+    for_num_cols_b_loop_start:
+      #for (j = 0; j < num_cols_b; j++)
+      movl j(%ebp), %ecx
+      cmpl num_cols_b(%ebp), %ecx
+        jge for_num_cols_b_loop_end
 
-  jmp loopmid
+      movl $0, k(%ebp)
+      movl $0, sum(%ebp) #c[i][j] = 0;
+      for_add_loop_start:
+      #for (k = 0; k < num_cols_a; k++)
+        movl k(%ebp), %ecx
+        cmpl num_cols_a(%ebp), %ecx
+          jge for_add_loop_end
 
-endloopmid:
+        movl a(%ebp), %ebx # get a
+        .rept 4
+          addl i(%ebp), %ebx  # get *a[i]
+        .endr
+        movl (%ebx), %ebx # get a[i]
+        .rept 4
+          addl k(%ebp), %ebx  # get *a[i][k]
+        .endr
+        movl (%ebx), %ebx # get a[i][k]
 
-  movl $0, x(%ebp)  
-  incl i(%ebp)
-  jmp loopouter
+        movl b(%ebp), %edx # get b
+        .rept 4
+          addl k(%ebp), %edx  # get *b[k]
+        .endr
+        movl (%edx), %edx # get b[k]
+        .rept 4
+          addl j(%ebp), %edx  # get *b[k][j]
+        .endr
+        movl (%edx), %edx # get b[k][j]
 
-endloopouter:
-  movl c(%ebp), %eax #&(c[0])
+        movl %ebx, %eax # put a[i][k] into %eax for multiplication
+        mull %edx # a[i][k] * b[k][j]
+        addl %eax, sum(%ebp) # c[i][j] + a[i][k] * b[k][j];
 
-epilogue: 
+        incl k(%ebp) # k++
+        jmp for_add_loop_start
+
+      for_add_loop_end:
+
+      movl c(%ebp), %eax # Get c
+      .rept 4
+        addl i(%ebp), %eax  # get *c[i]
+      .endr
+      movl (%eax), %eax # get c[i]
+      .rept 4
+        addl j(%ebp), %eax  # get *c[i][j]
+      .endr
+
+      movl sum(%ebp), %ebx
+      movl %ebx, (%eax) # c[i][j] = c[i][j] + a[i][k] * b[k][j];
+
+      incl j(%ebp)
+      jmp for_num_cols_b_loop_start
+    for_num_cols_b_loop_end:
+
+    incl i(%ebp)
+    jmp for_num_rows_a_loop_start
+  for_num_rows_a_loop_end:
+  movl c(%ebp), %eax
+
+epilogue:
   movl %ebp,  %esp
   pop %ebp
   ret
