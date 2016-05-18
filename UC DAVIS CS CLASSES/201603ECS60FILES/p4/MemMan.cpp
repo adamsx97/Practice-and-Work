@@ -42,7 +42,12 @@ int MemMan::alloc(int proc, int opNum, int size, MemCheck &memCheck, char print)
   if(print != '0')
     cout << "Opnum: " << opNum << " alloc: proc: " << proc << " address: " 
       << address << " size: " << size << endl;
-  
+  MEM_SPACE newNode;
+  newNode.proc = proc;
+  newNode.size = size;
+  newNode.opNum = opNum;
+  newNode.address = address;
+  splayTree.insert(newNode);
   // memCheck.printOwner(address, endAddress);
   // memCheck.printCurrentAllocations(proc);
   // allocates a block of the specified size, and returns its address.
@@ -55,6 +60,9 @@ void MemMan::deAlloc(int proc, int opNum, int startAddress, MemCheck &memCheck,
 {
   if (print != '0')
     cout << "Opnum: " << opNum << " daAlloc: proc: " << proc << " startAddress: " << startAddress << endl;
+  MEM_SPACE nodeToDeAlloc;
+  nodeToDeAlloc =  splayTree.find( );
+  splayTree.remove(nodeToDeAlloc);
   //  memCheck.printCurrentAllocations(proc);
   // memCheck.printOwner(startAddress, endAddress);
  
@@ -65,7 +73,7 @@ void MemMan::endProc(int proc, int opNum, MemCheck &memCheck, char print)
 {
   if(print != '0')
     cout << "Opnum: " << opNum << " endProc: proc: " << proc << endl;
-  
+  splayTree.makeEmpty();
    // memCheck.printCurrentAllocations(proc);
   // free all memory assigned to proc.
 } // endProc()

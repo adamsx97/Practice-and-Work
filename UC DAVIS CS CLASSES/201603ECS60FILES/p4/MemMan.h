@@ -2,9 +2,17 @@
 #define MemManH
 #include "mynew.h"
 #include "MemCheck.h"
+#include "SplayTree.h"
+
+typedef struct
+{
+	int proc, address, opNum, size;
+} MEM_SPACE;
 
 class MemMan
 {
+  private:
+  	SplayTree<MEM_SPACE> splayTree;
   public:
   MemMan(int ram, int proc, int op, MemCheck &memCheck);
   ~MemMan();
