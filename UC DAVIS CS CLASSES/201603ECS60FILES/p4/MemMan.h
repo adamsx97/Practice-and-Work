@@ -4,15 +4,20 @@
 #include "MemCheck.h"
 #include "SplayTree.h"
 
-typedef struct
+class MEMSPACE
 {
-	int proc, address, opNum, size;
-} MEM_SPACE;
+	int address, size;
+	MEMSPACE* next;
+public:
+	MEMSPACE(MEMSPACE* nextM, int address, int size);
+	~MEMSPACE();
+};
 
 class MemMan
 {
   private:
-  	SplayTree<MEM_SPACE> splayTree;
+  	MEMSPACE** space;
+  	int currAddress;
   public:
   MemMan(int ram, int proc, int op, MemCheck &memCheck);
   ~MemMan();

@@ -9,7 +9,12 @@ using namespace std;
 
 MemMan::MemMan(int ram, int proc, int op, MemCheck &memCheck) 
 {
- 
+  currAddress = 0;
+  space = new MEM_SPACE[100];
+  for (int i = 0; i < 100; ++i)
+  {
+    space[i] = NULL;
+  }
 }// MemMan()
 
 
@@ -29,8 +34,15 @@ bool MemMan::access(int proc, int address, int opNum, MemCheck &memCheck,
   // memCheck.printCurrentAllocations(proc);
  // memCheck.printOwner(address, address);
   
-   
-  return true;
+
+  MEM_SPACE *ptr = space[proc];
+  while(ptr && ptr->address + ptr->size => address)
+    ptr = ptr->next;
+  if(ptr)
+    return true;
+  else
+    endProc(proc, opNum, memCheck, print);
+    return true;
   // If seg fault, then free all memory assigned to the process, and return false.
   // If legitimate access, then return true;
 }  // access()
@@ -42,11 +54,10 @@ int MemMan::alloc(int proc, int opNum, int size, MemCheck &memCheck, char print)
   if(print != '0')
     cout << "Opnum: " << opNum << " alloc: proc: " << proc << " address: " 
       << address << " size: " << size << endl;
-  MEM_SPACE newNode;
-  newNode.proc = proc;
-  newNode.size = size;
-  newNode.opNum = opNum;
-  newNode.address = address;
+  address = currAddress;
+  MEM_SPACE* newNode;
+  newNode->size = size;
+  newNode->address = address;
   splayTree.insert(newNode);
   // memCheck.printOwner(address, endAddress);
   // memCheck.printCurrentAllocations(proc);
