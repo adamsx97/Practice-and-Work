@@ -115,7 +115,7 @@ matMult:
         #.rept 4
         #  addl i(%ebp), %ebx  # get *a[i]
         #.endr
-        movl i(ebp), %ecx
+        movl i(%ebp), %ecx
         movl (%ebx, %ecx, wordsize), %ebx
         movl (%ebx), %ebx # get a[i]
         #.rept 4
