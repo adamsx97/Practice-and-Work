@@ -41,17 +41,21 @@ matMult:
   .equ j, -3*wordsize #(%ebp)
   .equ k, -4*wordsize #(%ebp)
   .equ sum, -5*wordsize #(%ebp)
+  subl $20, %esp # make space
 
   #EAX is c
   #EBX is a
   #ECX is i
   #EDX is b
 
+  push %ebx
+
   # c = (int*)malloc(num_rows_a * sizeof(int*));
   movl num_rows_a(%ebp), %eax # get rows
   shll $2, %eax # num_rows * sizeof(int *)
   pushl %eax # give malloc its argument
   call malloc # Call malloc
+  addl $wordsize, %esp
 
   # save c
   movl %eax, c(%ebp)
@@ -71,14 +75,12 @@ matMult:
     shll $2, %ebx
     push %ebx
     call malloc
-    #addl $wordsize, %esp
+    addl $wordsize, %esp
 
     # c[i] = (int**)malloc(num_cols_b * sizeof(int));
-    movl c(%ebp), %eax #restore C
-    .rept 4
-      addl i(%ebp), %eax # get *c[i]
-    .endr
-    movl %ebx, (%eax)
+    movl c(%ebp), %edx #restore C
+    movl i(%ebp), %ebx
+    movl %eax, (%edx, %ebx, wordsize)
 
     incl i(%ebp) # i++
     jmp malloc_c_for_loop_start
