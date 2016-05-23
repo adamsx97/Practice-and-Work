@@ -31,9 +31,9 @@ matMult:
   movl %esp, %ebp
 
   .equ a, 2*wordsize #(%ebp)
-  .equ b, 3*wordsize #(%ebp)
-  .equ num_rows_a, 4*wordsize #(%ebp)
-  .equ num_cols_a, 5*wordsize #(%ebp)
+  .equ num_rows_a, 3*wordsize #(%ebp)
+  .equ num_cols_a, 4*wordsize #(%ebp)
+  .equ b, 5*wordsize #(%ebp)
   .equ num_rows_b, 6*wordsize #(%ebp)
   .equ num_cols_b, 7*wordsize #(%ebp)
   .equ c, -1*wordsize #(%ebp)
