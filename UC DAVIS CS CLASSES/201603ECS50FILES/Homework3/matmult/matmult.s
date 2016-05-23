@@ -117,13 +117,13 @@ matMult:
         #.endr
         movl i(%ebp), %ecx
         movl (%ebx, %ecx, wordsize), %ebx
-        movl (%ebx), %ebx # get a[i]
+        #movl (%ebx), %ebx # get a[i]
         #.rept 4
         #  addl k(%ebp), %ebx  # get *a[i][k]
         #.endr
         movl k(%ebp), %ecx
         movl (%ebx, %ecx, wordsize), %ebx
-        movl (%ebx), %ebx # get a[i][k]
+        #movl (%ebx), %ebx # get a[i][k]
 
         movl b(%ebp), %edx # get b
         #.rept 4
@@ -131,13 +131,13 @@ matMult:
         #.endr
         movl k(%ebp), %ecx
         movl (%edx, %ecx, wordsize), %edx
-        movl (%edx), %edx # get b[k]
+        #movl (%edx), %edx # get b[k]
         #.rept 4
         #  addl j(%ebp), %edx  # get *b[k][j]
         #.endr
         movl j(%ebp), %ecx
         movl (%edx, %ecx, wordsize), %edx
-        movl (%edx), %edx # get b[k][j]
+        #movl (%edx), %edx # get b[k][j]
 
         movl %ebx, %eax # put a[i][k] into %eax for multiplication
         mull %edx # a[i][k] * b[k][j]
@@ -154,14 +154,14 @@ matMult:
       #.endr
       movl i(%ebp), %ecx
       movl (%eax, %ecx, wordsize), %eax
-      movl (%eax), %eax # get c[i]
+      #movl (%eax), %eax # get c[i]
       #.rept 4
       #  addl j(%ebp), %eax  # get *c[i][j]
       #.endr
       movl j(%ebp), %ecx
-      movl (%eax, %ecx, wordsize), %eax
       movl sum(%ebp), %ebx
-      movl %ebx, (%eax) # c[i][j] = c[i][j] + a[i][k] * b[k][j];
+      movl %ebx, (%eax, %ecx, wordsize)
+      #movl %ebx, (%eax)  c[i][j] = c[i][j] + a[i][k] * b[k][j];
 
       incl j(%ebp)
       jmp for_num_cols_b_loop_start
