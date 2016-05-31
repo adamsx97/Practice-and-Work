@@ -1,4 +1,5 @@
 #include "MyFloat.h"
+#include <cstdio>
 
 MyFloat::MyFloat(){
   sign = 0;
@@ -32,19 +33,7 @@ bool MyFloat::operator==(const float rhs) const{
 
 MyFloat MyFloat::operator+(const MyFloat& rhs) const{
 	MyFloat small, big;
-	if ((this->exponent > rhs.exponent) || ((this->mantissa > rhs.mantissa) && this->exponent == rhs.exponent))
-		{
-			big = MyFloat(*this); 
-			small = MyFloat(rhs); 
-		}
-	if ((rhs.exponent > this->exponent) || ((rhs.mantissa > this->mantissa) && rhs.exponent == this->exponent))
-		{
-			int flag = rhs.sign; 
-			big.sign = 0; 
-			small.sign = 0; 
-			big = MyFloat(rhs); 
-			small = MyFloat(*this);
-		}
+	printf("%d %d %d\n", this->sign, this->mantissa, this->exponent);
 
 	return *this;
 } // overloaded operator +
