@@ -33,7 +33,12 @@ bool MyFloat::operator==(const float rhs) const{
 
 MyFloat MyFloat::operator+(const MyFloat& rhs) const{
 	MyFloat small, big;
-	printf("%u %u %u\n", this->sign, this->mantissa, this->exponent);
+	if (this->exponent == 0)
+    return rhs;
+  if (rhs.exponent == 0)
+    return *this;
+  if (this->sign != rhs.sign && this->mantissa == rhs.mantissa && this->exponent == rhs.exponent)
+    return MyFloat(0);
 
 	return *this;
 } // overloaded operator +
