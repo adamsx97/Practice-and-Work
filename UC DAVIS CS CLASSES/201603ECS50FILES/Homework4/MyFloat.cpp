@@ -93,7 +93,7 @@ MyFloat MyFloat::operator+(const MyFloat& rhs) const{
 
     if (big.mantissa == 0)
     {
-      big.sign = 0
+      big.sign = 0;
       big.exponent = 0;
     }
     else
