@@ -38,7 +38,7 @@ MyFloat MyFloat::operator+(const MyFloat& rhs) const{
 	return *this;
 } // overloaded operator +
 
-MyFloat operator-(const MyFloat& rhs) const{
+MyFloat MyFloat::operator-(const MyFloat& rhs) const{
 	MyFloat temp = MyFloat(rhs);
 	temp.sign = !temp.sign;
 	return *this + temp;
