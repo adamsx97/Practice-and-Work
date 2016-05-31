@@ -33,7 +33,7 @@ bool MyFloat::operator==(const float rhs) const{
 
 MyFloat MyFloat::operator+(const MyFloat& rhs) const{
 	MyFloat small, big;
-  int expDiff = 0;
+  int expDiff = 0, flag = 0;
 	
   if (this->exponent == 0)
     return rhs;
@@ -62,11 +62,14 @@ MyFloat MyFloat::operator+(const MyFloat& rhs) const{
     if  (((small.mantissa >> (expDiff - 1)) & 1) && (big.sign != small.sign))
     {
       small.mantissa >>= expDiff;
+      flag = small.mantissa & 1;
       small.mantissa += 1;
     }
-
-  else
-    small.mantissa >>= expDiff;  
+    else
+    {
+      small.mantissa >>= expDiff;  
+      flag = small.mantissa & 1;
+    }
   }
 
   small.exponent = big.exponent;
