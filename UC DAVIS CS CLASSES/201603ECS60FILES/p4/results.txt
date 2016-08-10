@@ -1,0 +1,13 @@
+Makefile optimization check: 
+OK
+Testing  Mem-100-400000-6.txt: 
+CPU Time: 0.688242 Ideal RAM: 291070 Your RAM: 663125 Real RAM: 702655
+Testing  Mem-100-400000-7.txt: 
+CPU Time: 0.687083 Ideal RAM: 269564 Your RAM: 632059 Real RAM: 702556
+Testing  Mem-100-400000-8.txt: 
+CPU Time: 0.707694 Ideal RAM: 301918 Your RAM: 420870 Real RAM: 703216
+
+Total CPU Time: Yours 2.08302  Sean's: 2.09 so your score is 20
+Total of virtual RAM: Yours 1716054  Sean's: 1716054 so your score is 15
+Total of real RAM: Your 2108427   Sean's: 2108427 so your scores is 15
+Total score: 20 + 15 + 15 + 0 = 50

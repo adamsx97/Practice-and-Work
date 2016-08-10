@@ -3,6 +3,7 @@
 
 #include "dsexceptions.h"
 #include <stdlib.h>
+#include "mynew.h"
 
         // SplayTree class
         //
@@ -27,6 +28,7 @@ class SplayTree;
 template <class Comparable>
 class SplayBinaryNode
 {
+  public:
 	Comparable  element;
   SplayBinaryNode *left;
   SplayBinaryNode *right;
@@ -42,40 +44,37 @@ template <class Comparable>
 class SplayTree
 {
 public:
-            explicit SplayTree( const Comparable & notFound );
-            SplayTree( const SplayTree & rhs );
-            ~SplayTree( );
+    explicit SplayTree();
+    SplayTree( const SplayTree & rhs );
+    ~SplayTree( );
 
-            const Comparable & findMin( );
-            const Comparable & findMax( );
-            const Comparable & find( const Comparable & x );
-            bool isEmpty( ) const;
-            void printTree( ) const;
+    const Comparable & findMin( );
+    const Comparable & findMax( );
+    const Comparable & find( const Comparable & x );
+    const Comparable & findClose( const Comparable & x);
+    bool isEmpty( ) const;
+    void printTree( ) const;
 
-            void makeEmpty( );
-            void insert( const Comparable & x );
-            void remove( const Comparable & x );
+    void makeEmpty( );
+    void insert( const Comparable & x );
+    void remove( const Comparable & x );
 
-            const SplayTree & operator=( const SplayTree & rhs );
+    const SplayTree & operator=( const SplayTree & rhs );
+    SplayBinaryNode<Comparable> *root;
+    SplayBinaryNode<Comparable> *nullNode;
+    Comparable ITEM_NOT_FOUND;
 
-          private:
+    Comparable & elementAt( SplayBinaryNode<Comparable> *t );
 
+    void reclaimMemory( SplayBinaryNode<Comparable> * t ) const;
+    void printTree( SplayBinaryNode<Comparable> *t ) const;
+    SplayBinaryNode<Comparable> * clone( SplayBinaryNode<Comparable> *t ) const;
 
-            SplayBinaryNode<Comparable> *root;
-            SplayBinaryNode<Comparable> *nullNode;
-            const Comparable ITEM_NOT_FOUND;
+        // Tree manipulations
+    void rotateWithLeftChild( SplayBinaryNode<Comparable> * & k2 ) const;
+    void rotateWithRightChild( SplayBinaryNode<Comparable> * & k1 ) const;
+    void splay( const Comparable & x, SplayBinaryNode<Comparable> * & t ) const;
+};
 
-            const Comparable & elementAt( SplayBinaryNode<Comparable> *t ) const;
-
-            void reclaimMemory( SplayBinaryNode<Comparable> * t ) const;
-            void printTree( SplayBinaryNode<Comparable> *t ) const;
-            SplayBinaryNode<Comparable> * clone( SplayBinaryNode<Comparable> *t ) const;
-
-                // Tree manipulations
-            void rotateWithLeftChild( SplayBinaryNode<Comparable> * & k2 ) const;
-            void rotateWithRightChild( SplayBinaryNode<Comparable> * & k1 ) const;
-            void splay( const Comparable & x, SplayBinaryNode<Comparable> * & t ) const;
-        };
-
-        #include "SplayTree.cpp"
-        #endif
+#include "SplayTree.cpp"
+#endif

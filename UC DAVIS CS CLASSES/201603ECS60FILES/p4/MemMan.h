@@ -3,22 +3,23 @@
 #include "mynew.h"
 #include "MemCheck.h"
 #include "SplayTree.h"
-
-class MEMSPACE
-{
-	int address, size;
-	MEMSPACE* next;
-public:
-	MEMSPACE(MEMSPACE* nextM, int address, int size);
-	~MEMSPACE();
-};
+#include "addressInfo.h"
+#include "QuadraticProbing.h"
+#include "QuadraticProbing2.h"
 
 class MemMan
 {
-  private:
-  	MEMSPACE** space;
-  	int currAddress;
-  public:
+  int RAM;
+  int procs;
+  int ops;
+  SplayTree <AddressInfo> trees[100];
+  AddressInfo *freeList;
+  int freeCount;
+  int maxFreeCount;
+  QuadraticHashTable beginTable;
+  QuadraticHashTable2 endTable;
+  void endProc2(int proc, int opNum, MemCheck &memCheck, SplayBinaryNode<AddressInfo> *t );
+public:
   MemMan(int ram, int proc, int op, MemCheck &memCheck);
   ~MemMan();
   bool access(int proc, int address, int opNum, MemCheck &memCheck, char print);
